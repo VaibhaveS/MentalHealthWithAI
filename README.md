@@ -9,6 +9,6 @@ Steps to run:
 
 
 <p>
- Please review the PR's which are open whenever you find time. Merge the PR only if there are >=2 approvals 
+ <b>Please review the PR's which are open whenever you find time. Merge the PR only if there are >=2 approvals</b>
   
 </p>
