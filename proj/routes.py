@@ -11,5 +11,6 @@ from flask import render_template,url_for,redirect,flash,request
 # from sklearn import preprocessing
 
 @app.route('/')
-def hello():
-   return "Hello"
+@app.route('/home')
+def home():
+    return render_template('html/home.html',title='Home')
