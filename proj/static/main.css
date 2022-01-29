@@ -1,3 +1,10 @@
 . {
 	margin: auto;
 }
+
+.contenta .card-body{
+    background-color:purple;
+    /*border:2px solid gold;*/
+    color:gold;
+    font-weight:bold;
+}
