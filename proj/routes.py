@@ -14,3 +14,8 @@ from flask import render_template,url_for,redirect,flash,request
 @app.route('/home')
 def home():
     return render_template('home.html',title='Home')
+
+
+@app.route('/emotion')
+def emotion():
+    return render_template('emotion.html',title='emotion')
