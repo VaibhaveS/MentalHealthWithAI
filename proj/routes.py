@@ -15,7 +15,9 @@ from flask import render_template,url_for,redirect,flash,request
 def home():
     return render_template('home.html',title='Home')
 
-
+@app.route('/div_pred')
+def div_pred():
+        return render_template('div_pred.html',title="Prediction")
 @app.route('/emotion')
 def emotion():
     return render_template('emotion.html',title='emotion')
