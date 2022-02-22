@@ -1,13 +1,76 @@
-. {
+.{
 	margin: auto;
 }
+audio{
+    outline:none;
+    
+    }
 
+.em_title{
+text-align:center;
+font-weight:bold;
+background-color:lightblue;
+border-bottom: 6px solid darkblue;
+}
+
+#controls{
+        top:100%;
+        left:50%;
+        border: 6px solid darkblue;
+        background-color: peachpuff;
+        margin: auto;
+        width: 50%;
+    }
 .contenta .card-body{
     background-color:peachpuff;
     /*border:2px solid gold;*/
     color:black;
-    font-weight:bold;
+    font-weight:bold;}
+
+.but{
+color:Black;
+outline:none;
+font-weight:bold;
+background-color:lightblue;
+border-radius: 0px;
+width:30%;
+text-align:center;
+/*padding-top:8px;
+padding-bottom:8px;*/
+font-size:17px;
+align-content: center;
+padding:10px 30px;
+display:block;
+margin:auto;
+border:0;
+border: 3px solid darkblue;
 }
+.but:hover{
+    background-color:black;
+    color:gold;
+}
+#sw{
+    font-weight: bold;
+    font-size: 20px;
+    text-align:center;
+}
+
+#recordingsList a{
+    text-decoration:none;
+    color:black;
+    padding:10px 30px;
+    background-color:lightblue;
+    font-weight:bold;
+    font-size:20px;
+    border-radius: 0px;
+    width:30%;
+    transition: all 0.3s ease-out;
+    border: 3px solid darkblue;
+    }
+    #recordingsList a:hover{
+        background-color:black;
+        color:gold;
+    }
 .div_form{
     margin:0 auto; 
 width:500px;

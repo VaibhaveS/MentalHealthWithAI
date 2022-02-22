@@ -1,6 +1,8 @@
-# AI_project
 
 
+ <p align="center">
+ <img src="https://github.com/VaibhaveS/AI_project/blob/main/proj/static/Mental%20health%20with%20AI.gif">
+ </p>
 <p>
  <b>Please review the PR's which are open whenever you find time. Merge the PR only if there are >=2 approvals</b>
 </p>
@@ -24,3 +26,4 @@ Alternative if the above doesn't work
  <li>C:\Users\HP\Desktop\AI_project\venv\Scripts\activate.bat</li>
  <li> Run using "run.py" </li> 
 <ul>
+<br/>
