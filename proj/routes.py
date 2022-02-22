@@ -6,14 +6,13 @@ from flask import json
 import pickle
 import nltk
 nltk.download('omw-1.4')
-import nltk
 # import numpy as np
 # import sklearn
 import psycopg2
 # from googleapiclient.discovery import build
 from sklearn import preprocessing
 import text2emotion as em
-import tkinter as tk
+#import tkinter as tk
 
 @app.route('/')
 @app.route('/home')
@@ -23,11 +22,11 @@ def home():
 ans=''
 
 def func(f):
-        with open(r'C:\Users\KISHAN\Documents\flaskproj\proj\aud.wav','wb') as audio:
+        with open(r'aud.wav','wb') as audio:
             f.save(audio)
         print('file uploaded successfully')
         r=sr.Recognizer()
-        filename = r"C:\Users\KISHAN\Documents\flaskproj\proj\aud.wav"
+        filename = r"aud.wav"
         with sr.AudioFile(filename) as source:
           audio_data = r.record(source)
           word = r.recognize_google(audio_data)
