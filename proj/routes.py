@@ -57,7 +57,9 @@ def tt():
 @app.route('/main_js',methods=['POST','GET'])
 def main_js():
    return render_template("/js/main.js")
-
+@app.route('/div_pred')
+def div_pred():
+        return render_template('div_pred.html',title="Prediction")
 @app.route('/emotion')
 def emotion():
     return render_template('emotion.html',title='emotion')
