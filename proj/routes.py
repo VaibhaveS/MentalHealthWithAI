@@ -5,7 +5,7 @@ from flask import jsonify
 from flask import json
 import pickle
 import nltk
-nltk.download('omw-1.4')
+#nltk.download('omw-1.4')
 # import numpy as np
 # import sklearn
 import psycopg2
