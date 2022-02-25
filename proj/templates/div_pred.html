@@ -1,8 +1,32 @@
+{% extends 'layout.html'%}
+
+{% block contenta %}
 <html>
     <head>
 
     </head>
-    <body>
-        <h2>Divorce Prediction Page: Will have the 10 qns</h2>
+    <style>
+
+    </style>
+    <body style="background-color:#00ffff">
+        <h2 style="text-align:center">Find out if your marriage is going to last</h2>
+        <div class="div_form">
+        <form id="f" name="f" >
+            <label for="Q1">We're just starting a discussion before I know what's going on:</label><br>
+            <input type="number" id="q1" name="q1"><br><br>
+            <label for="Q2">I hate my spouse's way of open a subject.</label><br>
+            <input type="number" id="q2" name="q2"><br><br>
+            <label for="Q3">My spouse and I have similar ideas about how roles should be in marriage:</label><br>
+            <input type="number" id="q3" name="q3"><br><br>
+            <label for="Q4">We share the same views about being happy in our life with my spouse:</label><br>
+            <input type="number" id="q4" name="q4"><br><br>
+            <label for="Q5">I hate my spouse's way of open a subject:</label><br>
+            <input type="number" id="q5" name="q5"><br><br>
+            <input type="submit" value="submit">
+        </form>
+    </div>
     </body>
 </html>
+{% endblock contenta %}
+{%block contentb%} 
+{%endblock contentb%}
