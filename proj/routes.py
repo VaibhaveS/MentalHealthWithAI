@@ -1,3 +1,4 @@
+from matplotlib.pyplot import title
 from proj import app
 from flask import render_template,url_for,redirect,flash,request
 import speech_recognition as sr
@@ -6,13 +7,14 @@ from flask import json
 import pickle
 import nltk
 nltk.download('omw-1.4')
-# import numpy as np
+import numpy as np
 # import sklearn
 import psycopg2
 # from googleapiclient.discovery import build
 from sklearn import preprocessing
 import text2emotion as em
 #import tkinter as tk
+km = pickle.load(open('km.pkl', 'rb'))
 
 @app.route('/')
 @app.route('/home')
@@ -63,3 +65,10 @@ def div_pred():
 @app.route('/emotion')
 def emotion():
     return render_template('emotion.html',title='emotion')
+
+@app.route('/cluster')
+def cluster():
+    attr_vals = [[2,2,2,2,1,3,2,1,1,2]]
+    grp = km.predict(attr_vals)
+    print(grp)
+    return render_template('cluster.html',title='cluster',grp = grp)
