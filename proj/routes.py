@@ -15,6 +15,7 @@ from sklearn import preprocessing
 import text2emotion as em
 #import tkinter as tk
 km = pickle.load(open('km.pkl', 'rb'))
+gmm = pickle.load(open('gmm.pkl', 'rb'))
 
 @app.route('/')
 @app.route('/home')
@@ -69,6 +70,8 @@ def emotion():
 @app.route('/cluster')
 def cluster():
     attr_vals = [[2,2,2,2,1,3,2,1,1,2]]
-    grp = km.predict(attr_vals)
-    print(grp)
-    return render_template('cluster.html',title='cluster',grp = grp)
+    grp1 = km.predict(attr_vals)
+    print(grp1)
+    grp2 = gmm.predict(attr_vals)
+    print(grp2)
+    return render_template('cluster.html',title='cluster',grp1 = grp1, grp2 = grp2)
