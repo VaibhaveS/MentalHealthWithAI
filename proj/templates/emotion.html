@@ -1,0 +1,29 @@
+{% extends 'layout.html'%}
+{% block contenta %}
+
+<br><br>
+<div id="controls">
+    <h1 class="em_title">
+        Emotion Analysis
+    </h1>
+    <br><br>
+    <button class="but" id="recordButton">DESCRIBE</button><br>
+    <!--<button class="but" id="pauseButton" disabled>Pause</button>--->
+    <button class="but" id="stopButton" disabled>STOP</button>
+   <br><br>
+   <!--<div id="formats">Format: start recording to see sample rate</div>-->
+   <!--<p><strong>Recordings:</strong></p>--->
+   <div align ="center" id="recordingsList"></div>
+   <br>
+   <div class="box">
+   <div class="mndisp" id="sw"></div>
+   <br>
+      <div class="pred"></div>
+   <br><br><br><br>
+   
+    <br><br>
+   <!-- inserting these scripts at the end to be able to use all the elements in the DOM -->
+   <script src="https://cdn.rawgit.com/mattdiamond/Recorderjs/08e7abd9/dist/recorder.js"></script>
+   <script src="{{ url_for('main_js')}}"></script>
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+{% endblock contenta %}
