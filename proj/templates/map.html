@@ -1,4 +1,5 @@
 <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.0.5/gsap.min.js"></script>
 
 {% extends 'layout.html'%}
 {% block contenta %}
@@ -62,6 +63,23 @@
     </dd>
 </dl>
 
+<button id="truck-button" class="truck-button" style="display:block;margin: auto;">
+    <span class="default">Start trip!</span>
+    <span class="success">
+        Sit back and relax
+        <svg viewbox="0 0 12 10">
+            <polyline points="1.5 6 4.5 9 10.5 1"></polyline>
+        </svg>
+    </span>
+    <div class="truck">
+        <div class="wheel"></div>
+        <div class="wheel2"></div>
+    </div>
+</button>
+
+<!-- dribbble - twitter -->
+
+
 <!--MAP-->
 <h2 id="AC"> Therapy World! </h2>
 <div class="map-container">
@@ -80,4 +98,5 @@ integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0v
 crossorigin=""></script>
 <script src="{{url_for('static', filename='map.js')}}"></script>
 <link rel="stylesheet" href="{{url_for('static', filename='map.css')}}"/>
+<link rel="stylesheet" href="{{url_for('static', filename='map.scss')}}"/>
 {% endblock contenta %}

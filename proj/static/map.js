@@ -8,6 +8,26 @@ L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
 }).addTo(map);
 let x=0;
 let nodes=[];
+
+const sleep=(delay)=>new Promise((resolve)=>setTimeout(resolve,delay))
+
+async function animate(path,nodes){
+    await sleep(5000);
+    for(let pathIndex in path){
+        icon = L.icon({
+            iconUrl: '/static/car.jpg',
+            iconSize: [50, 50], // size of the icon
+            // iconAnchor: [22, 94],
+            className: 'marker'
+        });
+        console.log("marking",nodes[path[pathIndex]].Coordinates[1],nodes[path[pathIndex]]);
+        marker = L.marker([nodes[path[pathIndex]].Coordinates[1],nodes[path[pathIndex]].Coordinates[0]], {icon: icon}).addTo(map);
+        await sleep(5000);
+        marker.remove();
+    }
+}
+
+
 function process(coordinates,info){
     x+=1;
     if(x>3) {
@@ -75,12 +95,11 @@ function getPath(){
     return required;
 }
 
-function sleep(ms) {
-    return new Promise(resolve => setTimeout(resolve, ms));
-}
+
+var pathz;
+var nodez;
 
 function TSP_SUBSET(nodes,path){
-    console.log(nodes,path);
     var dict = {"Source":0}; //type->mask
     for(let type in path){
         dict[path[type]]=+type + +1; //map therapy type to integer
@@ -93,27 +112,34 @@ function TSP_SUBSET(nodes,path){
     var queue=[]
     let visited=[]
     let steps=0;
-    queue.push([0,nodes[n-1],1<<dict[nodes[n-1].therapyType]]) //[distance so far, current node, mask]
+    queue.push([0,nodes[n-1],1<<dict[nodes[n-1].therapyType],JSON.stringify([n-1])]); //[distance so far, current node, mask]
     visited.push(JSON.stringify([nodes[n-1].Name,1]));
-    while(steps<50){
+    while(steps<5000 && queue.length!=0){
         steps+=1;
         queue.sort(function(a,b){ //mimic priority queue, best first search
           return a[0] - b[0];
         });
         let value = queue.shift();
-        if(value[1].Name=="Source" && value[2]==target){
-            console.log("Shortest path",value[0]);
-            break;
-        }
         for(let neighbours in nodes){
-            let new_mask=value[2]|(1<<dict[nodes[neighbours].therapyType]);
-            //if not visited nodes.name, new_mask
-            if(visited.includes(JSON.stringify([nodes[neighbours].Name,new_mask]))==true){
-                continue;
+            if((nodes[neighbours].Name=="Source") || ((value[2]&(1<<dict[nodes[neighbours].therapyType]))==0)){
+                let new_mask=value[2]|(1<<dict[nodes[neighbours].therapyType]);
+                //if not visited nodes.name, new_mask
+                if(nodes[neighbours].Name=="Source" && new_mask==target){
+                    console.log("Shortest path",value[0]+distance(value[1],nodes[neighbours]));
+                    console.log(value[3]);
+                    pathz=JSON.parse(value[3]);
+                    nodez=nodes;
+                    //animate(JSON.parse(value[3]),nodes);
+                    return;
+                }
+                if(new_mask==value[2] || visited.includes(JSON.stringify([nodes[neighbours].Name,new_mask]))==true){
+                    continue;
+                }
+                let new_path=JSON.parse(value[3]);
+                new_path.push(+neighbours);
+                queue.push([value[0]+distance(value[1],nodes[neighbours]),nodes[neighbours],new_mask,JSON.stringify(new_path)]);
+                visited.push(JSON.stringify([nodes[neighbours].Name,new_mask]));
             }
-            console.log(JSON.stringify(visited));
-            queue.push([value[0]+distance(value[1],nodes[neighbours]),nodes[neighbours],new_mask]);
-            visited.push(JSON.stringify([nodes[neighbours].Name,new_mask]));
         }
     }
     //queue
@@ -125,7 +151,6 @@ function TSP_SUBSET(nodes,path){
 let popup;
 let icon;
 let marker;
-
 // Set the visitor's pin on the map on demand
 const setVisitorPin = () => {
     if (navigator.geolocation) {
@@ -225,3 +250,106 @@ $('.mutliSelect input[type="checkbox"]').on('click', function() {
 
   }
 });
+
+document.querySelectorAll('.truck-button').forEach(button => {
+    button.addEventListener('click', e => {
+
+        e.preventDefault();
+        
+        let box = button.querySelector('.box'),
+            truck = button.querySelector('.truck');
+        
+        if(!button.classList.contains('done')) {
+            
+            if(!button.classList.contains('animation')) {
+
+                button.classList.add('animation');
+
+                gsap.to(button, {
+                    '--box-s': 1,
+                    '--box-o': 1,
+                    duration: .3,
+                    delay: .5
+                });
+
+                gsap.to(box, {
+                    x: 0,
+                    duration: .4,
+                    delay: .7
+                });
+
+                gsap.to(button, {
+                    '--hx': -5,
+                    '--bx': 50,
+                    duration: .18,
+                    delay: .92
+                });
+
+                gsap.to(box, {
+                    y: 0,
+                    duration: .1,
+                    delay: 1.15
+                });
+
+                gsap.set(button, {
+                    '--truck-y': 0,
+                    '--truck-y-n': -26
+                });
+
+                gsap.to(button, {
+                    '--truck-y': 1,
+                    '--truck-y-n': -25,
+                    duration: .2,
+                    delay: 1.25,
+                    onComplete() {
+                        gsap.timeline({
+                            onComplete() {
+                                button.classList.add('done');
+                            }
+                        }).to(truck, {
+                            x: 0,
+                            duration: .4
+                        }).to(truck, {
+                            x: 40,
+                            duration: 1
+                        }).to(truck, {
+                            x: 20,
+                            duration: .6
+                        }).to(truck, {
+                            x: 96,
+                            duration: .4
+                        });
+                        gsap.to(button, {
+                            '--progress': 1,
+                            duration: 2.4,
+                            ease: "power2.in"
+                        });
+                    }
+                });
+                
+            }
+            
+        } else {
+            button.classList.remove('animation', 'done');
+            gsap.set(truck, {
+                x: 4
+            });
+            gsap.set(button, {
+                '--progress': 0,
+                '--hx': 0,
+                '--bx': 0,
+                '--box-s': .5,
+                '--box-o': 0,
+                '--truck-y': 0,
+                '--truck-y-n': -26
+            });
+            gsap.set(box, {
+                x: -24,
+                y: -6
+            });
+        }
+
+    });
+});
+
+document.getElementById("truck-button").onclick = function() {animate(pathz,nodez)};
