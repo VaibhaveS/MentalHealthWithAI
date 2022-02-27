@@ -79,26 +79,27 @@ audio{
 .home {
     background-color: black; 
 }
+
 .div_form{
     margin:0 auto; 
-width:700px;
-padding:20px;
-background: #171717;
-/*background:rgb(94, 167, 151); */
-border:2px solid #333;
+    width:700px;
+    padding:20px;
+    background: #171717;
+    /*background:rgb(94, 167, 151); */
+    border:2px solid #333;
 }
 
 .div_question{
     margin:0 auto; 
-width:700px;
-background:black; 
-border:2px solid #333;
+    width:700px;
+    background:black; 
+    border:2px solid #333;
 }
-
 
 .textInp {
     width: 25px;
 }
+
 .rangeInp {
     background-color: orange;
 }
