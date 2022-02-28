@@ -122,6 +122,7 @@ function createDownloadLink(blob) {
     var br=document.createElement('br');
     var br1=document.createElement('br');
     var br2=document.createElement('br');
+    var br3=document.createElement('br');
 
     //name of .wav file to use during upload and download (without extendion)
     var filename = new Date().toISOString();
@@ -149,9 +150,12 @@ function createDownloadLink(blob) {
     //upload link
     d.style.alignContent="center";
     var upload = document.createElement('a');
+    var sp = document.createElement('span');
+    upload.appendChild(sp);
     upload.href="#";
-    upload.innerHTML = "Analyse";
+    sp.innerHTML = "Analyse";
     d.appendChild(br2);
+    d.appendChild(br3);
     upload.addEventListener("click", function(event){
           var xhr=new XMLHttpRequest();
           xhr.onload=function(e) {
