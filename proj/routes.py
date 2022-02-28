@@ -111,7 +111,9 @@ def div_pred():
 @app.route('/emotion')
 def emotion():
     return render_template('emotion.html',title='emotion')
-
+@app.route('/map')
+def map():
+    return render_template('map.html',title='map')
 @app.route('/cluster')
 def cluster():
     attr_vals = [[2,2,2,2,1,3,2,1,1,2]]
@@ -130,3 +132,11 @@ def cluster():
     grp3 = clusters[-1]
     print(grp3)
     return render_template('cluster.html',title='cluster',grp1 = grp1, grp2 = grp2, grp3 = grp3)
+@app.route('/predictions', methods =["POST"])
+def predictions():
+    form_response = {}
+    for i in range(1, 11, 1):
+        ques = "q" + str(i)
+        qi = request.form.get(ques)
+        form_response[ques] = qi
+    return form_response

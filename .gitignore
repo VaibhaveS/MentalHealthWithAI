@@ -15,3 +15,4 @@ proj/__pycache__
 # misc
 /venv
 .env
+*.wav
