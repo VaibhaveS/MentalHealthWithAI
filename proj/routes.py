@@ -12,7 +12,8 @@ import psycopg2
 # from googleapiclient.discovery import build
 from sklearn import preprocessing
 import text2emotion as em
-#import tkinter as tk
+from tkinter import *
+from tkinter import ttk
 import string
 from collections import Counter
 from nltk.corpus import stopwords
@@ -26,7 +27,8 @@ def home():
     return render_template('home.html',title='Home')
 
 ans=''
-
+#global confidence
+#confidence=0
 def func(f):
         with open(r'aud.wav','wb') as audio:
             f.save(audio)
@@ -38,7 +40,7 @@ def func(f):
           word = r.recognize_google(audio_data)
           word=word.strip()
           word=word.lower()
-          print(word)
+          #print(word)
           return word
 
 @app.route('/tt',methods=['POST','GET'])
@@ -47,8 +49,8 @@ def tt():
          f = request.files['audio_data']
          ans=func(f)
          print(ans)
-         #text="I am distressed and depressed. My relationship is very bad and i am hurt. i am angry"
-         txl = ans.lower()
+         text="i am very angry but i am happy some time angry sad and i feel like dying"
+         txl = text.lower()
          txpunc = txl.translate(str.maketrans('', '', string.punctuation))
          tokens = word_tokenize(txpunc, "english")
          wordlist = []
@@ -63,16 +65,21 @@ def tt():
          em=[]
          ct=0
          k=[]
+         print(lemmalist)
+         edict=dict()
          with open('emotion.txt', 'r') as file:
              for l in file:
                  line_clean = l.replace("\n", '').replace(",", '').replace("'", '').strip()
                  w, val = line_clean.split(':')
+                 edict[w.strip()]=val.strip()
                  if val not in k:
-                     k.append(val)
-                 if w in lemmalist:
+                     k.append(val.strip())
+         for x in lemmalist:
+             for w,val in edict.items():
+                 if(x==w):
                      em.append(val)
-         print(em)
-         print(k)
+                     break
+         print(em)       
          total=0
          for i in em:
              if(i.strip() not in emotion_dict.keys()):
@@ -81,21 +88,46 @@ def tt():
              else:
                  emotion_dict[i.strip()]+=1
                  total+=1
+         global pos
+         global neg
+         neg=0
+         pos=0
+         print(emotion_dict)
+         bad=['cheated','singled out','sad','fearful','angry','bored','embarrassed','powerless','hated','apathetic','alone','demoralized','anxious']
+         good=['love','attracted','happy','safe','obsessed']
+         print(emotion_dict) 
+       
          for i,x in emotion_dict.items():
              emotion_dict[i]=x/total
-         print(emotion_dict)  
-         #a=em.get_emotion(ans)
-         #print(a)
-         s=""
-         #root = tk()
-         # specify size of window.
-         #root.geometry("250x170")
-         #if(a['Angry']!=0 or a['Sad']!=0 or a['Fear']!=0):
-         #    s="Anger: "+str(a['Angry'])+"         Sad: "+str(a['Sad'])+"     Fear: "+str(a['Fear'])
-         #    ans=ans+"     "+s
-         #else:
-         #    ans=ans+"        You are getting well!"
+         for i,x in emotion_dict.items():
+             if i in bad:
+                 neg+=emotion_dict[i]
+             if i in good:
+                 pos+=emotion_dict[i]
+         print(neg)
+         print(pos)
+         global confidence
+         confidence=pos-neg
+         t=""
+         if(neg>=pos):
+             t="Your relationship is not healthy and you need immediate care"
+             print("Your relationship is not healthy and you need immediate care")
+         else:
+             t="you are getting well!"
+         win = Tk()
+         win.geometry("750x270")
+         def open_popup():
+             top= Toplevel(win)
+             top.geometry("750x250")
+             top.title("Confidence display")
+             Label(top, text="confidence level: "+str(round(confidence,2))+"\n\n"+t, font=('Helvetica 14 bold')).place(x=150,y=80)
+         text="confidence level: "+str(round(confidence,2))
+         Label(win,text="Your description: \n"+ ans,font=('Helvetica 14 bold')).pack(pady=20)
+         ttk.Button(win, text= "Open", command= open_popup).pack()
+         win.mainloop()
+         ans=ans+"<br><br>"+t
          return jsonify(ans)
+
 
 @app.route('/main_js',methods=['POST','GET'])
 def main_js():
