@@ -25,5 +25,5 @@ def predict():
     pickle_in = open('proj/Divorce pred ML Models/gradient_boosting.pickle', 'rb')
     pickle_clf = pickle.load(pickle_in)
     accuracy_pkl = pickle_clf.score(x_test_new, y_test)
-    print(accuracy_pkl)
-    print("HELLO!!!")
+    print("Accuracy of the model:"+str(accuracy_pkl))
+    
