@@ -6,6 +6,7 @@
 <link rel="stylesheet" href="{{url_for('static', filename='cluster.css')}}"/>
 <body onload="myFunction()" style="margin:0;">
 <div id="loader"></div>
+<p id="txt">Clustering</p>
 
 <div style="display:none;" id="myDiv" class="animate-bottom">
     
@@ -15,7 +16,7 @@ Hello you are in the clustering page
 <h2>Gaussian mixture: Therapy group {{grp2}}</h2>
 <h2>Hierarchical: Therapy group {{grp3}}</h2> -->
 
-<p>Therapy group: <p id="cc">Click on button to find out the thrapy group you are clustered into</p></p>
+<h3>Therapy group:</h3> <br><h3><p id="cc">Click on button to find out the thrapy group you are clustered into</p></h3>
 
 <button title="Change_group" class="button button1" onclick="choosecluster()">Change Therapy Group</button>
 
@@ -35,6 +36,7 @@ Hello you are in the clustering page
     
     function showPage() {
         document.getElementById("loader").style.display = "none";
+        document.getElementById("txt").style.display = "none";
         document.getElementById("myDiv").style.display = "block";
     }
     function choosecluster(params) {
