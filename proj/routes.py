@@ -116,8 +116,8 @@ def div_pred():
             ques = "q" + str(i)
             qi = request.form.get(ques)
             form_response[ques] = qi
-        predict()
-        print(form_response)
+        predict(form_response)
+        #print(form_response)
         return render_template('div_pred.html',title="Prediction")
 @app.route('/emotion')
 def emotion():
