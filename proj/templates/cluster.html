@@ -2,11 +2,36 @@
 
 {% block contenta %}
 
-<div>Hello you are in the clustering page</div>
+
+<link rel="stylesheet" href="{{url_for('static', filename='cluster.css')}}"/>
+<body onload="myFunction()" style="margin:0;">
+<div id="loader"></div>
+
+<div style="display:none;" id="myDiv" class="animate-bottom">
+    
+Hello you are in the clustering page
 
 <h2>Kmeans: Therapy group {{grp1}}</h2>
 <h2>Gaussian mixture: Therapy group {{grp2}}</h2>
 <h2>Hierarchical: Therapy group {{grp3}}</h2>
+
+</div>
+
+
+</body>
+<script>
+    var myVar;
+    
+    function myFunction() {
+        myVar = setTimeout(showPage, 3000);
+    }
+    
+    function showPage() {
+        document.getElementById("loader").style.display = "none";
+        document.getElementById("myDiv").style.display = "block";
+    }
+</script>
+
 {% endblock contenta %}
 {%block contentb%} 
 {%endblock contentb%}
