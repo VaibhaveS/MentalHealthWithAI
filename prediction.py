@@ -6,10 +6,12 @@ from sklearn import metrics
 from sklearn.feature_selection import SelectKBest
 from sklearn.feature_selection import chi2
 from sklearn.feature_selection import f_classif
+from flask import request
 '''
 For purpose of testing I have added this.
 Remove the commented out part and process the form details out here
 '''
+
 def predict():
     df = pd.read_csv("proj/Divorce pred ML Models/divorce.csv", sep = ';')
     X = df
@@ -26,4 +28,5 @@ def predict():
     pickle_clf = pickle.load(pickle_in)
     accuracy_pkl = pickle_clf.score(x_test_new, y_test)
     print("Accuracy of the model:"+str(accuracy_pkl))
+    #print(get_input())
     
