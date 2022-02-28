@@ -111,7 +111,9 @@ def div_pred():
 @app.route('/emotion')
 def emotion():
     return render_template('emotion.html',title='emotion')
-
+@app.route('/map')
+def map():
+    return render_template('map.html',title='map')
 @app.route('/cluster')
 def cluster():
     attr_vals = [[2,2,2,2,1,3,2,1,1,2]]
