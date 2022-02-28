@@ -132,3 +132,11 @@ def cluster():
     grp3 = clusters[-1]
     print(grp3)
     return render_template('cluster.html',title='cluster',grp1 = grp1, grp2 = grp2, grp3 = grp3)
+@app.route('/predictions', methods =["POST"])
+def predictions():
+    form_response = {}
+    for i in range(1, 11, 1):
+        ques = "q" + str(i)
+        qi = request.form.get(ques)
+        form_response[ques] = qi
+    return form_response
