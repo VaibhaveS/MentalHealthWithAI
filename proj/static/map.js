@@ -15,7 +15,7 @@ async function animate(path,nodes){
     await sleep(5000);
     for(let pathIndex in path){
         icon = L.icon({
-            iconUrl: '/static/car.jpg',
+            iconUrl: '/static/car.png',
             iconSize: [50, 50], // size of the icon
             // iconAnchor: [22, 94],
             className: 'marker'
@@ -43,7 +43,6 @@ function process(coordinates,info){
     popup = `<div class="container">
                 <h4 style='display:inline'><b>${info.name}</b><h6 style='display:inline'>, ${info.formatted}</h6></h4>
                 <div>
-                <h4>Distance ${info.distance} </h1>
                 <a href=${info.categories[0]}><em class="fab fa-linkedin"></em></a>
                 <a href=${info.distance}><em class="fab fa-github"></em></a>
                 </div>
@@ -163,7 +162,7 @@ const setVisitorPin = () => {
                 };
                 var cooords=[];
                 var type=[];
-                httpRequest="https://api.geoapify.com/v2/places?categories=healthcare&filter=circle:80.2817361,13.0924013,5000&bias=proximity:"+position.coords.longitude+","+position.coords.latitude+"&limit=2&apiKey=d0cb9c1f0e4a4def9cb160e707238b15"
+                httpRequest="https://api.geoapify.com/v2/places?categories=healthcare&filter=circle:80.2817361,13.0924013,5000&bias=proximity:"+position.coords.longitude+","+position.coords.latitude+"&limit=2&apiKey=[removed]"
                 fetch(httpRequest, requestOptions)
                   .then(response => response.json())
                   .then(result => {

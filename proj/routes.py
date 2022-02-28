@@ -63,3 +63,6 @@ def div_pred():
 @app.route('/emotion')
 def emotion():
     return render_template('emotion.html',title='emotion')
+@app.route('/map')
+def map():
+    return render_template('map.html',title='map')
