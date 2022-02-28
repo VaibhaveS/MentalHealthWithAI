@@ -3,26 +3,60 @@
 {% block contenta %}
 <html>
     <head>
+        <script>
+            function updateTextInput(val,num) {
+                ID = "textInput" + num
+                document.getElementById(ID).value=val; 
+            }
 
+        </script>
     </head>
     <style>
+        
 
     </style>
-    <body style="background-color:#00ffff">
+    <!--  #00ffff-->
+    <body style="background-color:blueviolet;">
         <h2 style="text-align:center">Find out if your marriage is going to last</h2>
+        <div class="div_question">
+        <p class="text-center" style="color: white;">Give appropriate ratings for the following queries:</p>
+        </div>
+        <br>
         <div class="div_form">
-        <form id="f" name="f" >
-            <label for="Q1">We're just starting a discussion before I know what's going on:</label><br>
-            <input type="number" id="q1" name="q1"><br><br>
+        <form id="f" name="f" method="post" action="/div_pred">
+            <label for="Q1" class="form-label">We're just starting a discussion before I know what's going on:</label><br>
+            <input class="rangeInp" type="range" id="q1" name = "q1" min="0" max="4" onchange="updateTextInput(this.value,1)">
+            <input type="text" id="textInput1" class="textInp" value="2"><br><br>
             <label for="Q2">I hate my spouse's way of open a subject.</label><br>
-            <input type="number" id="q2" name="q2"><br><br>
+            <input class="rangeInp" type="range" id="q2" name = "q2" min="0" max="4" onchange="updateTextInput(this.value,2)">
+            <input type="text" id="textInput2" class="textInp" value="2"><br><br>
             <label for="Q3">My spouse and I have similar ideas about how roles should be in marriage:</label><br>
-            <input type="number" id="q3" name="q3"><br><br>
+            <input class="rangeInp" type="range" id="q3" name = "q3" min="0" max="4" onchange="updateTextInput(this.value,3)">
+            <input type="text" id="textInput3" class="textInp" value="2"><br><br>
             <label for="Q4">We share the same views about being happy in our life with my spouse:</label><br>
-            <input type="number" id="q4" name="q4"><br><br>
+            <input class="rangeInp" type="range" id="q4" name = "q4" min="0" max="4" onchange="updateTextInput(this.value,4)">
+            <input type="text" id="textInput4" class="textInp" value="2"><br><br>
             <label for="Q5">I hate my spouse's way of open a subject:</label><br>
-            <input type="number" id="q5" name="q5"><br><br>
-            <input type="submit" value="submit">
+            <input class="rangeInp" type="range" id="q5" name = "q5" min="0" max="4" onchange="updateTextInput(this.value,5)">
+            <input type="text" id="textInput5" class="textInp" value="2"><br><br>
+            <label for="Q6">I enjoy traveling with my wife:</label><br>
+            <input class="rangeInp" type="range" id="q6" name = "q6" min="0" max="4" onchange="updateTextInput(this.value,6)">
+            <input type="text" id="textInput6" class="textInp" value="2"><br><br>
+            <label for="Q7"> My spouse and I have similar values in trust:</label><br>
+            <input class="rangeInp" type="range" id="q7" name = "q7" min="0" max="4" onchange="updateTextInput(this.value,7)">
+            <input type="text" id="textInput7" class="textInp" value="2"><br><br>
+            <label for="Q8"> Our dreams with my spouse are similar and harmonious:</label><br>
+            <input class="rangeInp" type="range" id="q8" name = "q8" min="0" max="4" onchange="updateTextInput(this.value,8)">
+            <input type="text" id="textInput8" class="textInp" value="2"><br><br>
+            <label for="Q9"> I can be humiliating when we discussions:</label><br>
+            <input class="rangeInp" type="range" id="q9" name = "q9" min="0" max="4" onchange="updateTextInput(this.value,9)">
+            <input type="text" id="textInput9" class="textInp" value="2"><br><br>
+            <label for="Q10"> I think that one day in the future, when I look back, I see that my spouse and I have been in harmony with each other:</label><br>
+            <input class="rangeInp" type="range" id="q10" name = "q10" min="0" max="4" onchange="updateTextInput(this.value,10)">
+            <input type="text" id="textInput10" class="textInp" value="2"><br><br>
+            <div class="col-12">
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </div>
         </form>
     </div>
     </body>
