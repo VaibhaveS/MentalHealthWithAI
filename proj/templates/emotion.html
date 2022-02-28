@@ -1,15 +1,20 @@
 {% extends 'layout.html'%}
 {% block contenta %}
-
+<link rel="stylesheet" href="{{url_for('static', filename='emotion.css')}}"/>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<div class="lw">
+<span class="loader">
+<span class="loader-inner">
+</span></span></div>
 <br><br>
 <div id="controls">
     <h1 class="em_title">
         Emotion Analysis
     </h1>
     <br><br>
-    <button class="but" id="recordButton">DESCRIBE</button><br>
+    <button class="but" id="recordButton"><span>DESCRIBE</span></button><br>
     <!--<button class="but" id="pauseButton" disabled>Pause</button>--->
-    <button class="but" id="stopButton" disabled>STOP</button>
+    <button class="but" id="stopButton" disabled><span>STOP</span></button>
    <br><br>
    <!--<div id="formats">Format: start recording to see sample rate</div>-->
    <!--<p><strong>Recordings:</strong></p>--->
@@ -22,6 +27,12 @@
    <br><br><br><br>
    
     <br><br>
+    
+    <script>
+        $(window).on("load",function(){
+        $(".lw").fadeOut(6000);
+        });
+    </script>
    <!-- inserting these scripts at the end to be able to use all the elements in the DOM -->
    <script src="https://cdn.rawgit.com/mattdiamond/Recorderjs/08e7abd9/dist/recorder.js"></script>
    <script src="{{ url_for('main_js')}}"></script>
