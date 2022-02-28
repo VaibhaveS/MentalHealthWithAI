@@ -9,7 +9,7 @@ import nltk
 nltk.download('omw-1.4')
 import numpy as np
 import pandas as pd
-
+from prediction import predict
 # import sklearn
 import psycopg2
 # from googleapiclient.discovery import build
@@ -106,9 +106,13 @@ def tt():
 @app.route('/main_js',methods=['POST','GET'])
 def main_js():
    return render_template("/js/main.js")
-@app.route('/div_pred')
+@app.route('/div_pred',methods=['POST','GET'])
 def div_pred():
+    if request.method=="GET":
         return render_template('div_pred.html',title="Prediction")
+    else:
+         predict()
+         return render_template('div_pred.html',title="Prediction")
 @app.route('/emotion')
 def emotion():
     return render_template('emotion.html',title='emotion')

@@ -9,19 +9,21 @@ from sklearn.feature_selection import f_classif
 '''
 For purpose of testing I have added this.
 Remove the commented out part and process the form details out here
-df = pd.read_csv("proj/Divorce pred ML Models/divorce.csv", sep = ';')
-X = df
-X.head()
-X = X.drop(["Class"], axis = 1)
-X.head()
-y = df["Class"]
-y.head()
-x_train, x_test, y_train, y_test = train_test_split(X, y, test_size=0.20, random_state=0)
-X_train_new = SelectKBest(score_func = f_classif, k=10).fit_transform(x_train, y_train)
-x_train = X_train_new
-x_test_new = SelectKBest(score_func = f_classif, k=10).fit_transform(x_test, y_test)
 '''
-pickle_in = open('proj/Divorce pred ML Models/gradient_boosting.pickle', 'rb')
-pickle_clf = pickle.load(pickle_in)
-accuracy_pkl = pickle_clf.score(x_test_new, y_test)
-print(accuracy_pkl)
+def predict():
+    df = pd.read_csv("proj/Divorce pred ML Models/divorce.csv", sep = ';')
+    X = df
+    X.head()
+    X = X.drop(["Class"], axis = 1)
+    X.head()
+    y = df["Class"]
+    y.head()
+    x_train, x_test, y_train, y_test = train_test_split(X, y, test_size=0.20, random_state=0)
+    X_train_new = SelectKBest(score_func = f_classif, k=10).fit_transform(x_train, y_train)
+    x_train = X_train_new
+    x_test_new = SelectKBest(score_func = f_classif, k=10).fit_transform(x_test, y_test)
+    pickle_in = open('proj/Divorce pred ML Models/gradient_boosting.pickle', 'rb')
+    pickle_clf = pickle.load(pickle_in)
+    accuracy_pkl = pickle_clf.score(x_test_new, y_test)
+    print(accuracy_pkl)
+    print("HELLO!!!")
