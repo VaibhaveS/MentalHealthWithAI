@@ -1,0 +1,118 @@
+<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.0.5/gsap.min.js"></script>
+
+{% extends 'layout.html'%}
+{% block contenta %}
+<!--OPTIONS-->
+<br>  
+<div style="    display: flex;
+    align-items: center;">
+<div role="group" class="dropdown btn-group" style="height: 5vh;margin:auto;"><select  id="dropdown-variants-Primary" aria-expanded="false" type="button" class="dropdown-toggle btn btn-warning btn-sm" data-bs-toggle="dropdown">
+      <option value="To measure time">Free of charge</option>
+      <option value="To measure distance">Paid</option>
+      <option value="To measure distance">N/A</option>
+  </select>
+</div>
+<div role="group" class="dropdown btn-group" style="height: 5vh;margin:auto;"><select  id="dropdown-variants-Primary" aria-expanded="false" type="button" class="dropdown-toggle btn btn-warning btn-sm" data-bs-toggle="dropdown">
+      <option value="To measure time">Wheelchair / No</option>
+      <option value="To measure distance">Wheelchair / Yes</option>
+      <option value="To measure volume">Wheelchair / Limited</option>
+      <option value="To measure distance">N/A</option>
+  </select>
+</div>
+<div role="group" class="dropdown btn-group" style="height: 5vh;margin:auto;"><select  id="dropdown-variants-Primary" aria-expanded="false" type="button" class="dropdown-toggle btn btn-warning btn-sm" data-bs-toggle="dropdown">
+      <option value="To measure time">Pets / No</option>
+      <option value="To measure distance">Pets / Leashed</option>
+      <option value="To measure volume">Pets/ Yes</option>
+      <option value="To measure distance">N/A</option>
+  </select>
+</div>
+<div role="group" class="dropdown btn-group" style="height: 5vh;margin:auto;"><select  id="dropdown-variants-Primary" aria-expanded="false" type="button" class="dropdown-toggle btn btn-warning btn-sm" data-bs-toggle="dropdown">
+      <option value="To measure time">Pets / No</option>
+      <option value="To measure distance">Pets / Leashed</option>
+      <option value="To measure volume">Pets/ Yes</option>
+      <option value="To measure distance">N/A</option>
+  </select>
+</div>
+<div role="group" class="dropdown btn-group" style="height: 5vh;margin:auto;"><select  id="dropdown-variants-Primary" aria-expanded="false" type="button" class="dropdown-toggle btn btn-warning btn-sm" data-bs-toggle="dropdown">
+      <option value="To measure time">Pets / No</option>
+      <option value="To measure distance">Pets / Leashed</option>
+      <option value="To measure volume">Pets/ Yes</option>
+      <option value="To measure distance">N/A</option>
+  </select>
+</div>
+</div>
+<br><br>
+<dl class="dropdown" style="display:block;margin: auto;width: 272px;"> 
+    <dt>
+    <a href="#">
+      <span class="hida">Select Details</span>    
+      <p class="multiSel"></p>  
+    </a>
+    </dt>
+    <dd>
+        <div class="mutliSelect">
+            <ul>
+                <li>
+                    <input id="Counselling" type="checkbox" value="Counselling" />
+                    <label for="Counselling">Counselling</label>
+              </li>
+                <li>
+                    <input id="Art" type="checkbox" value="Art therapy" />
+                    <label for="Art">Art therapy</label></li>
+                <li>
+                    <input id="Hypnotherapy" type="checkbox" value="Hypnotherapy" />
+              <label for="Hypnotherapy">Hypnotherapy</label></li>
+              <li>
+                    <input id="Depression" type="checkbox" value="Depression" />
+                  <label for="Depression">Depression</label>
+              </li>
+              <li>
+                    <input id="CBT" type="checkbox" value="CBT" />
+                    <label for="CBT">CBT</label>
+              </li>
+              <li>
+                    <input id="Existential" type="checkbox" value="Existential therapy" />
+              <label for="Existential">Existential therapy</label></li>
+            </ul>
+        </div>
+    </dd>
+</dl>
+<br>
+<button id="truck-button" class="truck-button" style="display:block;margin: auto;">
+    <span class="default">Start trip!</span>
+    <span class="success">
+        Sit back and relax
+        <svg viewbox="0 0 12 10">
+            <polyline points="1.5 6 4.5 9 10.5 1"></polyline>
+        </svg>
+    </span>
+    <div class="truck">
+        <div class="wheel"></div>
+        <div class="wheel2"></div>
+    </div>
+</button>
+
+<!-- dribbble - twitter -->
+
+
+<!--MAP-->
+<h2 id="AC"> Therapy World! </h2>
+<div class="map-container">
+    <div id="map" class="map" style="height:500px">map</div>
+    <button id="add-my-pin" class="btn btn-primary">
+        <strong>Show My Location!</strong>
+    </button>
+</div>
+
+<!-- Leaflet js -->
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
+integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
+crossorigin=""/>
+<script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
+integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
+crossorigin=""></script>
+<script src="{{url_for('static', filename='map.js')}}"></script>
+<link rel="stylesheet" href="{{url_for('static', filename='map.css')}}"/>
+<link rel="stylesheet" href="{{url_for('static', filename='map.scss')}}"/>
+{% endblock contenta %}
