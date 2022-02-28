@@ -1,22 +1,17 @@
 {% extends 'layout.html'%}
-
 {% block contenta %}
 <div class="contenta">
-<div class="container" >
-<div class="card text-center">
-    <div class="card-body" >
-        <br><br><br>
-      <h2 class="text">Divorce Prediction</h2>
-      <h4>Learn about your relationship!</h4>
-      <br>
+<div class="home">
+ <!--        <br><br><br>
+ --><!--       <h2 class="text">Divorce Prediction</h2>
+      <h4>Learn about your relationship!</h4> -->
+     <!--  <br> -->
+      <img src="/static/Mental health with AI.gif" alt="Girl in a jacket" style="height:50%;width:50%;margin:auto;display:block">
       <br><br>
-      <a href="http://127.0.0.1:5000/div_pred" class="btn btn-primary">Analyse</a>
-    </div>
-  </div>
+      <a href="http://127.0.0.1:5000/div_pred" class="btn btn-primary" style="margin:auto;display: block;">Analyse</a>
 </div>
-</div>
-<br><br><br><br><br><br><br>
 <script src="{{url_for('static',filename='main.js')}}"></script>
+</div>
 {% endblock contenta %}
 {%block contentb%} 
 {%endblock contentb%}

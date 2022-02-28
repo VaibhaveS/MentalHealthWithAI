@@ -1,49 +1,52 @@
 .{
-	margin: auto;
+    margin: auto;
+    background-color:  black;
 }
+
 audio{
     outline:none;
-    
-    }
+}
 
 .em_title{
-text-align:center;
-font-weight:bold;
-background-color:lightblue;
-border-bottom: 6px solid darkblue;
+    text-align:center;
+    font-weight:bold;
+    background-color:lightblue;
+    border-bottom: 6px solid darkblue;
 }
 
 #controls{
-        top:100%;
-        left:50%;
-        border: 6px solid darkblue;
-        background-color: peachpuff;
-        margin: auto;
-        width: 50%;
-    }
+    top:100%;
+    left:50%;
+    border: 6px solid darkblue;
+    background-color: peachpuff;
+    margin: auto;
+    width: 50%;
+}
+
 .contenta .card-body{
     background-color:peachpuff;
     /*border:2px solid gold;*/
     color:black;
-    font-weight:bold;}
+    font-weight:bold;
+}
 
 .but{
-color:Black;
-outline:none;
-font-weight:bold;
-background-color:lightblue;
-border-radius: 0px;
-width:30%;
-text-align:center;
-/*padding-top:8px;
-padding-bottom:8px;*/
-font-size:17px;
-align-content: center;
-padding:10px 30px;
-display:block;
-margin:auto;
-border:0;
-border: 3px solid darkblue;
+    color:Black;
+    outline:none;
+    font-weight:bold;
+    background-color:lightblue;
+    border-radius: 0px;
+    width:30%;
+    text-align:center;
+    /*padding-top:8px;
+    padding-bottom:8px;*/
+    font-size:17px;
+    align-content: center;
+    padding:10px 30px;
+    display:block;
+    margin:auto;
+    border:0;
+    border: 3px solid darkblue;
 }
 .but:hover{
     background-color:black;
@@ -67,14 +70,46 @@ border: 3px solid darkblue;
     transition: all 0.3s ease-out;
     border: 3px solid darkblue;
     }
-    #recordingsList a:hover{
-        background-color:black;
-        color:gold;
-    }
+
+#recordingsList a:hover{
+    background-color:black;
+    color:gold;
+}
+
+.home {
+    background-color: black; 
+}
+
 .div_form{
     margin:0 auto; 
-width:500px;
-padding:20px;
-background:#f9f9f9;
-border:2px solid #333;
+    width:700px;
+    padding:20px;
+    background: #171717;
+    /*background:rgb(94, 167, 151); */
+    border:2px solid #333;
+}
+
+.div_question{
+    margin:0 auto; 
+    width:700px;
+    background:black; 
+    border:2px solid #333;
+}
+
+.textInp {
+    width: 25px;
+}
+
+.rangeInp {
+    background-color: orange;
+}
+
+label {
+    color: white;
+    display: block;
+}
+
+input {
+    display:inline-block;
+    text-align:center;
 }
