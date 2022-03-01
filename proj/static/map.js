@@ -27,7 +27,6 @@ async function animate(path,nodes){
     }
 }
 
-
 function process(coordinates,info){
     x+=1;
     if(x>3) {
@@ -55,6 +54,9 @@ function process(coordinates,info){
         Categories: info.categories,
         therapyType: 'Counselling'
     };
+    for(let j in data){
+        dict[j]=data[j][getRandomInt(0,data[j].length-1)];
+    }
     nodes.push(dict);
 }
 
@@ -94,9 +96,90 @@ function getPath(){
     return required;
 }
 
-
 var pathz;
 var nodez;
+
+function animate2(nodes,good_nodes){
+    console.log("gud",good_nodes);
+    for(let nodeIndex=+0;nodeIndex<good_nodes.length;nodeIndex+=1){
+        console.log("heey",nodeIndex);
+        icon = L.icon({
+            iconUrl: '/static/gpic.png',
+            iconSize: [50, 50], // size of the icon
+            // iconAnchor: [22, 94],
+            className: 'marker'
+        });
+        console.log(good_nodes[nodeIndex],nodes);
+        console.log("marking",nodes[good_nodes[nodeIndex]].Coordinates[1],nodes[good_nodes[nodeIndex]]);
+        marker = L.marker([nodes[good_nodes[nodeIndex]].Coordinates[1],nodes[good_nodes[nodeIndex]].Coordinates[0]], {icon: icon}).addTo(map);
+    }
+}
+
+
+async function BFS(nodes){
+    var n=nodes.length;
+    var adj={};
+    for(let node in nodes) {
+        adj[node]=[];
+    }
+    for(let node in nodes){
+        for(let node2 in nodes){
+            let inserted=0;
+            for(let km=1;km<20;km+=1){
+                if(distance(nodes[node],nodes[node2])<=km && distance(nodes[node],nodes[node2])>km-1){
+                    inserted+=1;
+                    adj[+node].push(+node2);
+                }
+                if(inserted>0) {
+                    break;
+                }
+            }
+        }
+    }
+    console.log("adj list",adj);
+    var visited=[];
+    let queue=[];
+    queue.push(n-1);
+    visited.push(n-1);
+    let kk=+0;
+    await sleep(5000);
+    while(queue.length!=0 && kk<10){
+        await sleep(5000);
+        kk+=1;
+        const nn=queue.length;
+        let good_nodes=[];
+        let maxScore=0;
+        for(let zz=0;zz<nn;zz+=1){
+            let node = queue.shift();
+            console.log("exploring",node);
+            let score=0;
+            //calculate score of this node
+            for(let i in data){
+                if(userData[i]==nodes[node][i] || userData[i]=="N/A"){
+                    score+=1
+                }
+            }
+            if(score>maxScore) {
+                maxScore=score;
+                good_nodes=[];
+            }
+            if(score==maxScore) {
+                good_nodes.push(+node);
+            }
+            for(let j in adj[node]){
+                console.log("j= ",adj[node][j],visited,visited.includes(+adj[node][j]));
+                if(visited.includes(+adj[node][j])==false){
+                    console.log("visiting",adj[node][j],"from ",node);
+                    visited.push(+adj[node][j]);
+                    queue.push(+adj[node][j]);
+                }
+            }
+        }
+        console.log("max possible score in this layer is ",maxScore);
+        animate2(nodes,good_nodes);
+    }
+    console.log("adj",adj);
+}
 
 function TSP_SUBSET(nodes,path){
     var dict = {"Source":0}; //type->mask
@@ -150,6 +233,29 @@ function TSP_SUBSET(nodes,path){
 let popup;
 let icon;
 let marker;
+
+var data={
+    "Service": ["Free of charge","Paid"],
+    "Wheelchair": ["No","Yes","Limited"],
+    "Pets": ["No","Yes","Leashed"],
+    "Entity": ["Government","Private"],
+    "Location": ["Easy to access","Difficult to access","N/A"]
+};
+
+var userData={};
+
+function getUserData(){
+    let j=1;
+    for(let i in data){
+        userData[i]=document.getElementById("dropdown-variants-Primary"+j).value;
+        j+=1;
+    }
+}
+
+function getRandomInt(min, max) {
+  return Math.floor(Math.random() * (max - min + 1) + min);
+}
+
 // Set the visitor's pin on the map on demand
 const setVisitorPin = () => {
     if (navigator.geolocation) {
@@ -162,7 +268,10 @@ const setVisitorPin = () => {
                 };
                 var cooords=[];
                 var type=[];
-                httpRequest="https://api.geoapify.com/v2/places?categories=healthcare&filter=circle:80.2817361,13.0924013,5000&bias=proximity:"+position.coords.longitude+","+position.coords.latitude+"&limit=2&apiKey=[removed]"
+                httpRequest="https://api.geoapify.com/v2/places?categories=healthcare&filter=circle:"+position.coords.longitude+","+position.coords.latitude+",5000&bias=proximity:"+position.coords.longitude+","+position.coords.latitude+"&limit=15&apiKey=[removed]"
+                console.log("one ",httpRequest);
+                //httpRequest="https://api.geoapify.com/v2/places?categories=healthcare&filter=circle:80.2193408,13.0809856,5000&bias=proximity:80.2193408,13.0809856&limit=15&apiKey=d0cb9c1f0e4a4def9cb160e707238b15";
+                console.log("two ",httpRequest);
                 fetch(httpRequest, requestOptions)
                   .then(response => response.json())
                   .then(result => {
@@ -176,7 +285,15 @@ const setVisitorPin = () => {
                         Categories: 'NULL',
                         therapyType: 'Source',
                     };
+                    for(let j in data){
+                        dict[j]=data[j][getRandomInt(0,data[j].length-1)];
+                    }
+
+                    console.log(dict);
                     nodes.push(dict);
+                    getUserData();
+                    console.log(userData);
+                    BFS(nodes);
                     TSP_SUBSET(nodes,getPath());
                   })
                 .catch(error => console.log('error', error));

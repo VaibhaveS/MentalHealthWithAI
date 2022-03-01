@@ -343,6 +343,7 @@ a {
 }
 
 label {
+  color: black;
   display: inline-block;
   position: relative;
   padding: 5px;
