@@ -4,6 +4,7 @@
 /node_modules/
 /.pnp
 proj/__pycache__
+/__pycache__
 .pnp.js
 
 # testing
