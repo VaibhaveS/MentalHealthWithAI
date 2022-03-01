@@ -148,9 +148,14 @@ def div_pred():
             ques = "q" + str(i)
             qi = request.form.get(ques)
             form_response[ques] = qi
-        predict(form_response)
+        res = str(predict(form_response))
+        if(res == "1"):
+            res = "Sorry to say that your marriage is not going to last. You can use our therapy system for improving your relationship."
+        else:
+            res = "Your marriage is going to last. Your relationhsip is strong"
+        #redirect("Result.html")
         #print(form_response)
-        return render_template('div_pred.html',title="Prediction")
+        return render_template('Result.html', Pred_result = res)
 @app.route('/emotion')
 def emotion():
     return render_template('emotion.html',title='emotion')

@@ -23,7 +23,7 @@
         </div>
         <br>
         <div class="div_form">
-        <form id="f" name="f" method="post" action="/div_pred">
+        <form id="f" name="f" method="post" action="{{url_for('div_pred')}}">
             <label for="Q1" class="form-label">We're just starting a discussion before I know what's going on:</label><br>
             <input class="rangeInp" type="range" id="q1" name = "q1" min="0" max="4" onchange="updateTextInput(this.value,1)">
             <input type="text" id="textInput1" class="textInp" value="2"><br><br>
@@ -64,3 +64,11 @@
 {% endblock contenta %}
 {%block contentb%} 
 {%endblock contentb%}
+{% block script %}
+<script>
+    $(document).ready(function() {
+        console.log("Window is loaded")
+        $("#f").div_pred("show")
+    })
+</script>
+{% endblock %}
