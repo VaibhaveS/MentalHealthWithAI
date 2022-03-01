@@ -18,4 +18,4 @@ frame = pd.DataFrame(df)
 frame['cluster'] = labels
 print(frame)
 
-pickle.dump(gmm, open('gmm.pkl','wb'))
+pickle.dump([gmm,frame], open('gmm.pkl','wb'))
