@@ -6,6 +6,7 @@
 proj/__pycache__
 /__pycache__
 .pnp.js
+__pycache__
 
 # testing
 /coverage
