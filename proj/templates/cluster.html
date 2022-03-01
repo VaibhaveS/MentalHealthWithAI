@@ -19,7 +19,6 @@ Hello you are in the clustering page
 <h3>Therapy group:</h3> <br><h3><p id="cc">Click on button to find out the thrapy group you are clustered into</p></h3>
 
 <button title="Change_group" class="button button1" onclick="choosecluster()">Change Therapy Group</button>
-
 </div>
 
 
@@ -28,7 +27,7 @@ Hello you are in the clustering page
 <script>
     var myVar;
     var ct = 0;
-    const algogrps = [{{grp1}}, {{grp2}}, {{grp3}}];
+    const algogrps = [{{grp1[0]}}, {{grp2[0]}}, {{grp3[0]}}];
     
     function myFunction() {
         myVar = setTimeout(showPage, 3000);
