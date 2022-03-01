@@ -40,6 +40,7 @@ def predict(fr):
         print("Divorced")
     else:
         print("Not Divorced")
+    return prediction
     #print("Accuracy of the model:"+str(accuracy_pkl))
     #print(get_input())
     
