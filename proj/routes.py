@@ -167,14 +167,14 @@ def cluster():
     attr_vals = [[2,2,2,2,1,3,2,1,1,2]]
 
     #km[0] model, km[1] df with clusters col
-    print(km[1])
+    #print(km[1])
     t1 = [2,2,2,2,1,3,2,1,1,2]
     grp1 = km[0].predict(attr_vals)
     t1.append(grp1[0])
     km[1].loc[len(km[1].index)] = t1
     # print(type(km[1]))
-    # print(grp1)
-    # print(km[1])
+    print(grp1)
+    print(km[1])
 
     grp2 = gmm[0].predict(attr_vals)
     t2 = [2,2,2,2,1,3,2,1,1,2]
@@ -192,6 +192,6 @@ def cluster():
     grp3 = clusters[-1]
     pts['Cluster'] = list(hc.labels_)
     #print(grp3)
-    #print(pts)
+    print(pts)
     return render_template('cluster.html',title='cluster',grp1 = [grp1,km[1]], grp2 = [grp2,gmm[1]], grp3 = [grp3,pts])
 
