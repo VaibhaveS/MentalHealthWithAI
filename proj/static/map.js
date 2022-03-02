@@ -287,7 +287,7 @@ const setVisitorPin = () => {
                 };
                 var cooords=[];
                 var type=[];
-                httpRequest="https://api.geoapify.com/v2/places?categories=healthcare&filter=circle:"+position.coords.longitude+","+position.coords.latitude+",5000&bias=proximity:"+position.coords.longitude+","+position.coords.latitude+"&limit=20&apiKey=d0cb9c1f0e4a4def9cb160e707238b15"
+                httpRequest="https://api.geoapify.com/v2/places?categories=healthcare&filter=circle:"+position.coords.longitude+","+position.coords.latitude+",5000&bias=proximity:"+position.coords.longitude+","+position.coords.latitude+"&limit=20&apiKey=[removed]"
                 console.log("one ",httpRequest);
                 //httpRequest="https://api.geoapify.com/v2/places?categories=healthcare&filter=circle:80.2193408,13.0809856,5000&bias=proximity:80.2193408,13.0809856&limit=15&apiKey=d0cb9c1f0e4a4def9cb160e707238b15";
                 console.log("two ",httpRequest);
