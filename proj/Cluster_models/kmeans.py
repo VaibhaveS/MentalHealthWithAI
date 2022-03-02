@@ -7,7 +7,8 @@ import pickle
 df = pd.read_excel('proj\Cluster_models\divorce.xlsx')
 df = df[['Atr9','Atr11','Atr15','Atr17','Atr18','Atr19','Atr20','Atr36','Atr38','Atr40']]
 
-kmeans = cluster.KMeans(n_clusters=5 ,init="k-means++")
+n = 5
+kmeans = cluster.KMeans(n_clusters=n ,init="k-means++")
 kmeans = kmeans.fit(df)
 
 kmeans.cluster_centers_
@@ -17,4 +18,4 @@ print(df.head())
 
 print(df['Cluster'].value_counts())
 
-pickle.dump([kmeans,df], open('km.pkl','wb'))
+pickle.dump([kmeans,df,n], open('km.pkl','wb'))

@@ -188,10 +188,10 @@ def cluster():
     #print(pts)
     pts.loc[len(pts.index)] = [2,2,2,2,1,3,2,1,1,2]
     #print(pts)
-    clusters = hc.fit_predict(pts)
+    clusters = hc[0].fit_predict(pts)
     grp3 = clusters[-1]
-    pts['Cluster'] = list(hc.labels_)
+    pts['Cluster'] = list(hc[0].labels_)
     #print(grp3)
     print(pts)
-    return render_template('cluster.html',title='cluster',grp1 = [grp1,km[1]], grp2 = [grp2,gmm[1]], grp3 = [grp3,pts])
+    return render_template('cluster.html',title='cluster',grp1 = [grp1,km[1].to_dict(),km[2]], grp2 = [grp2,gmm[1].to_dict(),gmm[2]], grp3 = [grp3,pts.to_dict(),hc[1]])
 

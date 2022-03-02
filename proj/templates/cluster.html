@@ -10,23 +10,93 @@
 
 <div style="display:none;" id="myDiv" class="animate-bottom">
     
-Hello you are in the clustering page
 
-<!-- <h2>Kmeans: Therapy group {{grp1}}</h2>
-<h2>Gaussian mixture: Therapy group {{grp2}}</h2>
-<h2>Hierarchical: Therapy group {{grp3}}</h2> -->
+<!-- <h2>Kmeans: Therapy group {{grp1[1]}}</h2>
+<h2>Gaussian mixture: Therapy group {{grp2[1]}}</h2>
+<h2>Hierarchical: Therapy group {{grp3[1]}}</h2> -->
 
-<h3>Therapy group:</h3> <br><h3><p id="cc">Click on button to find out the thrapy group you are clustered into</p></h3>
+    <h3>Therapy group:</h3> <br><h3><p id="cc">Click on button to find out the thrapy group you are clustered into</p></h3>
 
-<button title="Change_group" class="button button1" onclick="choosecluster()">Change Therapy Group</button>
+    <button title="Change_group" class="button button1" onclick="choosecluster()">Change Therapy Group</button>
+    <br><br>
+    <p>{{grp1[2]}} {{grp2[2]}} {{grp3[2]}}</p>
+    <div id="clus0" style="display: none;">
+        <p>Kmeans</p>
+        {% for i in range(0,grp1[2]) %}
+        <div class="quote-wrapper animate fadeInRight">
+            <h2>Group{{i}}</h2>
+            <blockquote class="text">
+                <p>
+                    {% for key2, value2 in grp1[1]['Cluster'].items() %}
+                        {% if(i==value2)%}
+                            {% if i==170 %}
+                                <img src="/static/man(1).png" alt="hey" height="12" width="12">
+                            {% else %}
+                                <img src="/static/men.png" alt="hey" height="12" width="12">
+                            {% endif %}
+                        {% endif %}
+                    {% endfor %}
+                </p>
+            </blockquote>
+        </div>
+        <br>
+        {% endfor %}
+    </div>
+    
+
+    <div id="clus1" style="display: none;">
+        <p>Gaussian</p>
+        {% for i in range(0,grp2[2]) %}
+        <div class="quote-wrapper animate fadeInLeft">
+            <h2>Group{{i}}</h2>
+            <blockquote class="text">
+                <p>
+                    {% for key2, value2 in grp2[1]['Cluster'].items() %}
+                        {% if(i==value2)%}
+                            {% if i==170  %}
+                                <img src="/static/man(1).png" alt="hey" height="12" width="12">
+                            {% else %}
+                                <img src="/static/men.png" alt="hey" height="12" width="12">
+                            {% endif %}
+                        {% endif %}
+                    {% endfor %}
+                </p>
+            </blockquote>
+        </div>
+        <br>
+        {% endfor %}
+    </div>
+    <div id="clus2" style="display: none;">
+        <p>Hierarchical</p>
+        {% for i in range(0,grp3[2]) %}
+        <div class="quote-wrapper animate fadeInRight">
+            <h2>Group{{i}}</h2>
+            <blockquote class="text">
+                <p>
+                    {% for key2, value2 in grp3[1]['Cluster'].items() %}
+                        {% if(i==value2)%}
+                            {% if i==170 %}
+                                <img src="/static/man(1).png" alt="hey" height="12" width="12">
+                            {% else %}
+                                <img src="/static/men.png" alt="hey" height="12" width="12">
+                            {% endif %}
+                        {% endif %}
+                    {% endfor %}
+                </p>
+            </blockquote>
+        </div>
+        <br>
+        {% endfor %}
+    </div>
 </div>
 
 
 
 </body>
-<script>
+<script type="text/javascript">
     var myVar;
     var ct = 0;
+    var df;
     const algogrps = [{{grp1[0]}}, {{grp2[0]}}, {{grp3[0]}}];
     
     function myFunction() {
@@ -38,11 +108,29 @@ Hello you are in the clustering page
         document.getElementById("txt").style.display = "none";
         document.getElementById("myDiv").style.display = "block";
     }
-    function choosecluster(params) {
+
+    function choosecluster(params,jsonObj) {
         document.getElementById("cc").innerText = algogrps[ct];
+        if(ct==0){
+            document.getElementById("clus0").style.display = "block";
+            document.getElementById("clus1").style.display = "none";
+            document.getElementById("clus2").style.display = "none";
+        }
+        else if(ct==1){
+            document.getElementById("clus0").style.display = "none";
+            document.getElementById("clus1").style.display = "block";
+            document.getElementById("clus2").style.display = "none";
+        }
+        else if(ct==2){
+            document.getElementById("clus0").style.display = "none";
+            document.getElementById("clus1").style.display = "none";
+            document.getElementById("clus2").style.display = "block";
+        }
+        
         ct++;
         if(ct==3)ct=0;
     }
+
 </script>
 
 {% endblock contenta %}
