@@ -11,7 +11,8 @@ df
 import scipy.cluster.hierarchy as shc
 dend = shc.dendrogram(shc.linkage(df, method='ward'))
 
+n=2
 from sklearn.cluster import AgglomerativeClustering
 cluster = AgglomerativeClustering(n_clusters=2, affinity='euclidean', linkage='ward')  
 
-pickle.dump(cluster, open('hc.pkl','wb'))
+pickle.dump([cluster,n], open('hc.pkl','wb'))
