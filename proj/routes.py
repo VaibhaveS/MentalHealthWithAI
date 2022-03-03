@@ -101,8 +101,6 @@ def tt():
          print(emotion_dict)
          bad=['cheated','singled out','sad','fearful','angry','bored','embarrassed','powerless','hated','apathetic','alone','demoralized','anxious']
          good=['love','attracted','happy','safe','obsessed']
-         print(emotion_dict) 
-       
          for i,x in emotion_dict.items():
              emotion_dict[i]=x/total
          for i,x in emotion_dict.items():
@@ -117,7 +115,6 @@ def tt():
          t=""
          if(neg>=pos):
              t="Your relationship is not healthy and you need immediate care"
-             print("Your relationship is not healthy and you need immediate care")
          else:
              t="you are getting well!"
          win = Tk()
