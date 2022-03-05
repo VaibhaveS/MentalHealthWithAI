@@ -29,7 +29,7 @@
                 <p>
                     {% for key2, value2 in grp1[1]['Cluster'].items() %}
                         {% if(i==value2)%}
-                            {% if i==170 %}
+                            {% if key2 ==170 %}
                                 <img src="/static/man(1).png" alt="hey" height="12" width="12">
                             {% else %}
                                 <img src="/static/men.png" alt="hey" height="12" width="12">
@@ -39,7 +39,7 @@
                 </p>
             </blockquote>
         </div>
-        <br>
+        <br><br><br>
         {% endfor %}
     </div>
     
@@ -53,7 +53,7 @@
                 <p>
                     {% for key2, value2 in grp2[1]['Cluster'].items() %}
                         {% if(i==value2)%}
-                            {% if i==170  %}
+                            {% if key2==170  %}
                                 <img src="/static/man(1).png" alt="hey" height="12" width="12">
                             {% else %}
                                 <img src="/static/men.png" alt="hey" height="12" width="12">
@@ -63,7 +63,7 @@
                 </p>
             </blockquote>
         </div>
-        <br>
+        <br><br><br>
         {% endfor %}
     </div>
     <div id="clus2" style="display: none;">
@@ -75,7 +75,7 @@
                 <p>
                     {% for key2, value2 in grp3[1]['Cluster'].items() %}
                         {% if(i==value2)%}
-                            {% if i==170 %}
+                            {% if key2==170 %}
                                 <img src="/static/man(1).png" alt="hey" height="12" width="12">
                             {% else %}
                                 <img src="/static/men.png" alt="hey" height="12" width="12">
@@ -85,7 +85,7 @@
                 </p>
             </blockquote>
         </div>
-        <br>
+        <br><br><br>
         {% endfor %}
     </div>
 </div>

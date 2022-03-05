@@ -75,9 +75,9 @@ body{
 .text {
     background: radial-gradient(
     ellipse at center,
-    rgba(0, 128, 172, 1) 0%,
-    rgba(0, 128, 172, 1) 70%,
-    rgba(0, 128, 172, 0) 70.3%
+    rgba(255, 0, 255, 1) 0%,
+    rgba(255, 0, 255, 1) 70%,
+    rgba(255, 0, 255, 0) 70.3%
     );
     height: 100%;
     width: 100%;
@@ -180,3 +180,5 @@ animation-name: fadeInLeft;
     -webkit-animation-name: fadeInRight;
     animation-name: fadeInRight;
   }
+
+  
