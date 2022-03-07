@@ -166,10 +166,6 @@ def map():
 @app.route('/cluster')
 def cluster():
     print([int(i) for i in list(form_response.values())])
-    # var1 = list(form_response.values())
-    # print(var1)
-    # var2 = [int(i) for i in var1]
-    # print(var2)
     attr_vals = [[int(i) for i in list(form_response.values())]]
 
     #km[0] model, km[1] df with clusters col
