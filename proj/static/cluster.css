@@ -1,0 +1,219 @@
+body{
+    background-color: black;
+    color: yellow;
+}
+#txt{
+    font-size: xx-large;
+}
+#loader {
+    position: absolute;
+    left: 48%;
+    top: 48%;
+    z-index: 1;
+    width: 220px;
+    height: 220px;
+    margin: -76px 0 0 -76px;
+    border-top: 16px solid blue;
+    border-bottom: 16px solid blue;
+    border-radius: 50%;
+    border-top: 16px solid #3498db;
+    -webkit-animation: spin 2s linear infinite;
+    animation: spin 2s linear infinite;
+}
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+.animate-bottom {
+    position: relative;
+    animation-name: animatebottom;
+    animation-duration: 1s
+}
+@keyframes animatebottom { 
+    from{ bottom:-100px; opacity:0 } 
+    to{ bottom:0; opacity:1 }
+}
+#myDiv {
+    display: none;
+    text-align: center;
+}
+
+.button {
+    background-color: #4CAF50; /* Green */
+    border: none;
+    color: white;
+    padding: 16px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    transition-duration: 0.4s;
+    cursor: pointer;
+}
+
+.button1 {
+    background-color: black; 
+    color: white; 
+    border: 2px solid #4CAF50;
+}
+
+.button1:hover {
+    background-color: #4CAF50;
+    color: white;
+    box-shadow: 0 12px 16px 0 rgba(250, 248, 248, 0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+}
+  
+.quote-wrapper {
+    height: 300px;
+    position: relative;
+    width: 300px;
+    margin: auto;
+}
+
+.text {
+    background: radial-gradient(
+    ellipse at center,
+    rgba(255, 0, 255, 1) 0%,
+    rgba(255, 0, 255, 1) 70%,
+    rgba(255, 0, 255, 0) 70.3%
+    );
+    height: 100%;
+    width: 100%;
+    color: white;
+    position: relative;
+    margin: 0;
+}
+
+.text::before {
+    content: "";
+    float: left;
+    height: 100%;
+    width: 50%;
+    shape-outside: polygon(
+      0 0,
+      98% 0,
+      50% 6%,
+      23.4% 17.3%,
+      6% 32.6%,
+      0 50%,
+      6% 65.6%,
+      23.4% 82.7%,
+      50% 94%,
+      98% 100%,
+      0 100%
+    );
+    shape-margin: 7%;
+}
+.text p {
+    font-size: 21px;
+    font-style: italic;
+    height: 100%;
+    line-height: 1.25;
+    padding: 0;
+    text-align: center;
+    text-shadow: 0.5px 0.5px 1px rgba(0, 0, 0, 0.3);
+}
+.text p::before {
+    content: "";
+    float: right;
+    height: 100%;
+    width: 50%;
+    shape-outside: polygon(
+      2% 0%,
+      100% 0%,
+      100% 100%,
+      2% 100%,
+      50% 94%,
+      76.6% 82.7%,
+      94% 65.6%,
+      100% 50%,
+      94% 32.6%,
+      76.6% 17.3%,
+      50% 6%
+      );
+    shape-margin: 7%;
+}
+
+.animate {
+    -webkit-animation-duration: 1s;
+    animation-duration: 1s;
+    -webkit-animation-fill-mode: both;
+    animation-fill-mode: both;
+}
+
+@keyframes fadeInLeft {
+    from {
+        opacity: 0;
+        -webkit-transform: translate3d(-100%, 0, 0);
+        transform: translate3d(-100%, 0, 0);
+    }
+
+    to {
+        opacity: 1;
+        -webkit-transform: none;
+        transform: none;
+    }
+}
+
+.fadeInLeft {
+-webkit-animation-name: fadeInLeft;
+animation-name: fadeInLeft;
+}
+
+@keyframes fadeInRight {
+    from {
+      opacity: 0;
+      -webkit-transform: translate3d(100%, 0, 0);
+      transform: translate3d(100%, 0, 0);
+    }
+  
+    to {
+      opacity: 1;
+      -webkit-transform: none;
+      transform: none;
+    }
+  }
+  
+  .fadeInRight {
+    -webkit-animation-name: fadeInRight;
+    animation-name: fadeInRight;
+  }
+
+.main-container {
+    /* margin-top: 2rem;
+    height: calc(100vh - 2rem);
+    display: flex; */
+    float: left;
+    align-items: center;
+    justify-content: space-around;
+}
+/* image and info container */
+.img-container {
+    display: inline-block;
+    position: relative;
+    border: 2px solid #333;
+}
+/* style for div with information */
+.img-info {
+    position: absolute;
+    background-color: white;
+    color: black;
+    transition: opacity .3s ease-in-out;
+    opacity: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: .5rem;
+}
+
+.img-info-above {
+    left: -2px;
+    top: -2rem;
+    height: 2rem;
+    width: calc(100% + 4px);
+}
+  /* this part show information on hover */
+.img-container:hover .img-info {
+    opacity: 1;
+}

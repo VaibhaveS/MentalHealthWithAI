@@ -1,5 +1,6 @@
 {% extends 'layout.html'%}
 {% block contenta %}
+<link rel="stylesheet" href="{{url_for('static', filename='home.css')}}"/>
 <div class="contenta">
 <div class="home">
  <!--        <br><br><br>
@@ -12,6 +13,47 @@
 </div>
 <script src="{{url_for('static',filename='main.js')}}"></script>
 </div>
+<div class="footer-dark">
+      <footer>
+          <div class="container">
+              <div class="row">
+                  <div class="col-sm-6 col-md-3 item">
+                      <h3>Developed by</h3>
+                      <ul>
+                          <li><a href="#">Dr. Vergin Raja Sarobin M</a></li>
+                          <li><a href="#">S Vaibhave</a></li>
+                          <li><a href="#">S M Satya Sree Narayanan</a></li>
+                          <li><a href="#">Balaji M</a></li>
+                          <li><a href="#">Aravinda B</a></li>
+                          <li><a href="#">Praneeth Sethumadhavan</a></li>
+                          <li><a href="#">S Lakshman Rao</a></li>
+                          <li><a href="#">Saravanan Kishan</a></li>
+                      </ul>
+                  </div>
+                  <div class="col-sm-6 col-md-3 item">
+                        <a href="https://github.com/VaibhaveS/AI_project"><img src="/static/gpic.png" class="gpic" ></img></a>
+                  </div>
+                  
+                  <div class="col-md-6 item text">
+                      <h3>Divorce Predictor</h3>
+                      <p>This application was developed as a part of the AI course at VIT-Chennai</p>
+                      <p>It consists of 4 modules:</p>
+                      <ul>
+                        <li><a href="#">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp- Divorce Prediction</a></li>
+                        <li><a href="#">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp- Find support Groups</a></li>
+                        <li><a href="#">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp- Emotional Analysis</a></li>
+                        <li><a href="#">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp- Find a Psychologist</a></li>
+                        
+                    </ul>
+                    
+                  </div>
+            
+                  <!--<div class="col item social"><a href="#"><i class="icon ion-social-facebook"></i></a><a href="#"><i class="icon ion-social-twitter"></i></a><a href="#"><i class="icon ion-social-snapchat"></i></a><a href="#"><i class="icon ion-social-instagram"></i></a></div>-->
+              </div>
+              <!--<p class="copyright"><a href="https://github.com/VaibhaveS/AI_project">GitHub Link</a></p>-->
+              <!--<div><a href="https://github.com/VaibhaveS/AI_project"><img src="/static/gpic.png" class="gpic" ></img></a></div>-->
+          </div>
+      </footer>
 {% endblock contenta %}
 {%block contentb%} 
 {%endblock contentb%}
