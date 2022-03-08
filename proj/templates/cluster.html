@@ -6,7 +6,7 @@
 <link rel="stylesheet" href="{{url_for('static', filename='cluster.css')}}"/>
 <body onload="myFunction()" style="margin:0;">
 <div id="loader"></div>
-<p id="txt">Clustering</p>
+<div style="width: 120px; height: 50px; position: absolute; top:0; bottom: 0; left: 0; right: 0; margin: auto;"><p id="txt">Clustering</p></div>
 
 <div style="display:none;" id="myDiv" class="animate-bottom">
     
@@ -29,7 +29,7 @@
                 <p>
                     {% for key2, value2 in grp1[1]['Cluster'].items() %}
                         {% if(i==value2)%}
-                            {% if key2 ==170 %}
+                            {% if key2==170  %}
                                 <img src="/static/man(1).png" alt="hey" height="12" width="12">
                             {% else %}
                                 <img src="/static/men.png" alt="hey" height="12" width="12">
