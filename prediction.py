@@ -26,7 +26,8 @@ def predict(fr):
     x_train = X_train_new
     x_test_new = SelectKBest(score_func = f_classif, k=10).fit_transform(x_test, y_test)
     '''
-    pickle_in = open('proj/Divorce pred ML Models/gradient_boosting.pickle', 'rb')
+    pickle_in = open('proj/Divorce pred ML Models/rfclf', 'rb')
+
     pickle_clf = pickle.load(pickle_in)
     ans=[]
     #accuracy_pkl = pickle_clf.score(x_test_new, y_test)
