@@ -26,6 +26,7 @@ from nltk.tokenize import word_tokenize
 km = pickle.load(open('km.pkl', 'rb'))
 gmm = pickle.load(open('gmm.pkl', 'rb'))
 hc = pickle.load(open('hc.pkl', 'rb'))
+form_response = {}
 
 @app.route('/')
 @app.route('/home')
@@ -140,7 +141,7 @@ def div_pred():
     if request.method=="GET":
         return render_template('div_pred.html',title="Prediction")
     else:
-        form_response = {}
+        #form_response = {}
         for i in range(1, 11, 1):
             ques = "q" + str(i)
             qi = request.form.get(ques)
@@ -161,34 +162,38 @@ def map():
     return render_template('map.html',title='map')
 @app.route('/cluster')
 def cluster():
-    attr_vals = [[2,2,2,2,1,3,2,1,1,2]]
+    if(not form_response):
+        return render_template('error.html')
+    else:
+        print([int(i) for i in list(form_response.values())])
+        attr_vals = [[int(i) for i in list(form_response.values())]]
 
-    #km[0] model, km[1] df with clusters col
-    #print(km[1])
-    t1 = [2,2,2,2,1,3,2,1,1,2]
-    grp1 = km[0].predict(attr_vals)
-    t1.append(grp1[0])
-    km[1].loc[len(km[1].index)] = t1
-    # print(type(km[1]))
-    print(grp1)
-    print(km[1])
+        #km[0] model, km[1] df with clusters col
+        #print(km[1])
+        t1 = [int(i) for i in list(form_response.values())]
+        grp1 = km[0].predict(attr_vals)
+        t1.append(grp1[0])
+        km[1].loc[len(km[1].index)] = t1
+        # print(type(km[1]))
+        print(grp1)
+        print(km[1])
 
-    grp2 = gmm[0].predict(attr_vals)
-    t2 = [2,2,2,2,1,3,2,1,1,2]
-    t2.append(grp2[0])
-    gmm[1].loc[len(gmm[1].index)] = t2
-    print(grp2)
-    print(gmm[1])
+        grp2 = gmm[0].predict(attr_vals)
+        t2 = [int(i) for i in list(form_response.values())]
+        t2.append(grp2[0])
+        gmm[1].loc[len(gmm[1].index)] = t2
+        print(grp2)
+        print(gmm[1])
 
-    pts = pd.read_excel('proj\Cluster_models\divorce.xlsx')
-    pts = pts[['Atr9','Atr11','Atr15','Atr17','Atr18','Atr19','Atr20','Atr36','Atr38','Atr40']]
-    #print(pts)
-    pts.loc[len(pts.index)] = [2,2,2,2,1,3,2,1,1,2]
-    #print(pts)
-    clusters = hc[0].fit_predict(pts)
-    grp3 = clusters[-1]
-    pts['Cluster'] = list(hc[0].labels_)
-    #print(grp3)
-    print(pts)
-    return render_template('cluster.html',title='cluster',grp1 = [grp1,km[1].to_dict(),km[2]], grp2 = [grp2,gmm[1].to_dict(),gmm[2]], grp3 = [grp3,pts.to_dict(),hc[1]])
+        pts = pd.read_excel('proj\Cluster_models\divorce.xlsx')
+        pts = pts[['Atr9','Atr11','Atr15','Atr17','Atr18','Atr19','Atr20','Atr36','Atr38','Atr40']]
+        #print(pts)
+        pts.loc[len(pts.index)] = [int(i) for i in list(form_response.values())]
+        #print(pts)
+        clusters = hc[0].fit_predict(pts)
+        grp3 = clusters[-1]
+        pts['Cluster'] = list(hc[0].labels_)
+        #print(grp3)
+        print(pts)
+        return render_template('cluster.html',title='cluster',grp1 = [grp1,km[1].to_dict(),km[2]], grp2 = [grp2,gmm[1].to_dict(),gmm[2]], grp3 = [grp3,pts.to_dict(),hc[1]])
 

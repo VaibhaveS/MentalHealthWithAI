@@ -4,8 +4,6 @@ body{
 }
 #txt{
     font-size: xx-large;
-    padding-left: 45%;
-    padding-top: 18%;
 }
 #loader {
     position: absolute;
@@ -15,7 +13,8 @@ body{
     width: 220px;
     height: 220px;
     margin: -76px 0 0 -76px;
-    border: 16px solid #f3f3f3;
+    border-top: 16px solid blue;
+    border-bottom: 16px solid blue;
     border-radius: 50%;
     border-top: 16px solid #3498db;
     -webkit-animation: spin 2s linear infinite;
@@ -181,4 +180,40 @@ animation-name: fadeInLeft;
     animation-name: fadeInRight;
   }
 
-  
+.main-container {
+    /* margin-top: 2rem;
+    height: calc(100vh - 2rem);
+    display: flex; */
+    float: left;
+    align-items: center;
+    justify-content: space-around;
+}
+/* image and info container */
+.img-container {
+    display: inline-block;
+    position: relative;
+    border: 2px solid #333;
+}
+/* style for div with information */
+.img-info {
+    position: absolute;
+    background-color: white;
+    color: black;
+    transition: opacity .3s ease-in-out;
+    opacity: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: .5rem;
+}
+
+.img-info-above {
+    left: -2px;
+    top: -2rem;
+    height: 2rem;
+    width: calc(100% + 4px);
+}
+  /* this part show information on hover */
+.img-container:hover .img-info {
+    opacity: 1;
+}

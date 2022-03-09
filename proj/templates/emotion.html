@@ -7,10 +7,40 @@
 <span class="loader-inner">
 </span></span></div>
 <br><br>
-<div id="controls">
-    <h1 class="em_title">
+
+<!-- <div id="controls"> -->
+    <section>
+        <div class="content">
+            <h2>EmotionalAnalysis</h2>
+            <h2>EmotionalAnalysis</h2>
+        </div>
+    </section>
+    
+    <!-- <h1 class="em_title">
         Emotion Analysis
-    </h1>
+    </h1> -->
+    
+
+    <div class="textid" class>
+    <h4>We would to like hear your thoughts and feelings and this might help us to find your emotions.
+       <br> This Analysis will help you to get back on right track.
+   Click on the below button and share your thoughts.</h4>
+</div>
+   <br>
+    <div id="bars"> 
+        <img src="/static/user.png" height="230px" width="230px">
+          <div class="bar"></div>
+          <div class="bar"></div>
+          <div class="bar"></div>
+          <div class="bar"></div>
+          <div class="bar"></div>
+          <div class="bar"></div>
+          <div class="bar"></div>
+          <div class="bar"></div>
+          <div class="bar"></div>
+          <div class="bar"></div>
+           <img src="/static/system.png" id="pic">
+    </div>
     <br><br>
     <button class="but" id="recordButton"><span>DESCRIBE</span></button><br>
     <!--<button class="but" id="pauseButton" disabled>Pause</button>--->
@@ -27,6 +57,8 @@
    <br><br><br><br>
    
     <br><br>
+
+ 
     
     <script>
         $(window).on("load",function(){
@@ -37,4 +69,4 @@
    <script src="https://cdn.rawgit.com/mattdiamond/Recorderjs/08e7abd9/dist/recorder.js"></script>
    <script src="{{ url_for('main_js')}}"></script>
    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-{% endblock contenta %}
+   {% endblock contenta %}
