@@ -1,4 +1,62 @@
 {% extends 'layout.html'%}
 {% block contenta %}
-<link rel="stylesheet" href="{{url_for('static', filename='emotion.css')}}"/>
+<link rel="stylesheet" href="{{url_for('static', filename='analysis.css')}}"/>
+<br>
+
+{% if al==1 %}
+<img src="/static/alarm1.gif" alt="pos" style="margin:auto;display:block;height:25%;width:32%;">
+    
+{% elif conf > 0 %}
+<img src="/static/pos1.gif" alt="pos" style="height:25%;width:25%;margin:auto;display:block">
+
+{% elif conf==0 %}
+<img src="/static/neut1.gif" alt="pos" style="height:25%;width:25%;margin:auto;display:block">
+
+{% elif conf < 0 %}
+<img src="/static/neg1.gif" alt="pos" style="height:25%;width:25%;margin:auto;display:block">
+
+{% endif %}
+<br>
+<br>
+<br>
+
+<div class="op">
+
+    <br>
+<span><b>User Input:</b> {{x}}</span>
+<hr>
+<span><b>Confidence Level:</b> {{conf}}</span>
+<hr>
+<span><b>Analysis:</b> {{resp}}</span><br>
+{% if al==0 and conf>0 %}
+<br>
+{% endif %}
+{% if al==1 %}
+<hr style=" border: 8px solid red;border-radius: 5px;">
+<h3><b>Suicide Prevention Helplines</b></h3>
+<hr style=" border: 8px solid red;border-radius: 5px;">
+<p><h4><b>Jeevan Aastha Helpline</b></h4>1800 233 3330 | 24x7 | <a href="http://www.jeevanaastha.com/" target="_blank">http://www.jeevanaastha.com/</a> </p>
+<hr>
+<p><h4><b>Sneha India foundation</b></h4>
++91 044-24640050 | 24x7 | <a href="https://snehaindia.org/" target="_blank">https://snehaindia.org/</a></p><hr>
+     <p><h4><b>One Life</b></h4>
+  +91 7893078930 |
+  24x7 |
+   Hyderabad</p><hr>
+
+  <p><h4><b>Kiran Mental Health </b> </h4> 18005990019 | 24x7 | ( GOVT ) </p>
+
+  {% elif conf < 0 or conf ==0 %}  
+  <hr>
+  <h4>Visit our <a href="http://127.0.0.1:5000/div_pred"><b>Divorce Prediction Site </b></a>to decide what to do next</h4>
+{% endif %}
+</div>
+<br>
+
+     
+  
+
+
+
+
 {% endblock contenta %}

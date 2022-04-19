@@ -54,10 +54,11 @@ def func(f):
 def tt():
     if request.method == "POST":
          f = request.files['audio_data']
-         ans=func(f)
-         print(ans)
+         global speech
+         speech=func(f)
+         print(speech)
          #text="i am very angry but i am happy some time angry sad and i feel like dying"
-         txl = ans.lower()
+         txl = speech.lower()
          txpunc = txl.translate(str.maketrans('', '', string.punctuation))
          tokens = word_tokenize(txpunc, "english")
          wordlist = []
@@ -72,7 +73,15 @@ def tt():
          em=[]
          ct=0
          k=[]
-         print(lemmalist)
+         #print(lemmalist)
+         global alarm
+         a1="dying"
+         a2="die"
+         if(a1 in lemmalist or a2 in lemmalist):
+             alarm=1
+         else:
+             alarm=0
+         print(alarm)
          edict=dict()
          with open('emotion.txt', 'r') as file:
              for l in file:
@@ -86,7 +95,7 @@ def tt():
                  if(x==w):
                      em.append(val)
                      break
-         print(em)       
+         #print(em)       
          total=0
          for i in em:
              if(i.strip() not in emotion_dict.keys()):
@@ -99,7 +108,6 @@ def tt():
          global neg
          neg=0
          pos=0
-         print(emotion_dict)
          bad=['cheated','singled out','sad','fearful','angry','bored','embarrassed','powerless','hated','apathetic','alone','demoralized','anxious']
          good=['love','attracted','happy','safe','obsessed']
          for i,x in emotion_dict.items():
@@ -109,27 +117,19 @@ def tt():
                  neg+=emotion_dict[i]
              if i in good:
                  pos+=emotion_dict[i]
-         print(neg)
-         print(pos)
          global confidence
          confidence=pos-neg
+         global t
          t=""
-         if(neg>=pos):
-             t="Your relationship is not healthy and you need immediate care"
-         else:
-             t="you are getting well!"
-         win = Tk()
-         #win.geometry("750x270")
-        # def open_popup():
-         #    top= Toplevel(win)
-          #   top.geometry("750x250")
-         #    top.title("Confidence display")
-          #   Label(top, text="confidence level: "+str(round(confidence,2))+"\n\n"+t, font=('Helvetica 14 bold')).place(x=150,y=80)
-         #text="confidence level: "+str(round(confidence,2))
-        # Label(win,text="Your description: \n"+ ans,font=('Helvetica 14 bold')).pack(pady=20)
-        # ttk.Button(win, text= "Open", command= open_popup).pack()
-        # win.mainloop()
-         ans=ans+"<br><br>"+t
+         if(alarm==1):
+             t="You are getting mentally affected and you require immediate care"
+         elif(neg>pos):
+             t="Your relationship is not healthy and is filled with negativity"
+         elif(neg<pos):
+             t="You are getting well and improvement can be observed"
+         elif(neg==pos):
+             t="Your emotions are balanced but you can get even better soon"
+         ans=" "
          return jsonify(ans)
 
 
@@ -154,13 +154,22 @@ def div_pred():
         #redirect("Result.html")
         #print(form_response)
         return render_template('Result.html', Pred_result = res)
+
+
 @app.route('/emotion')
 def emotion():
     return render_template('emotion.html',title='emotion')
 
 @app.route('/analysis')
 def analysis():
-    return render_template('analysis.html',title='analysis')
+    x=speech
+    resp=t
+    conf=confidence
+    al=alarm
+    print(x)
+    print(t)
+    print(conf)
+    return render_template('analysis.html',title='analysis',x=x,resp=resp,conf=conf,al=al)
 
 @app.route('/map')
 def map():
