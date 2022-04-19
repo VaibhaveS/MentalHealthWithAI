@@ -26,7 +26,7 @@ def predict(fr):
     x_train = X_train_new
     x_test_new = SelectKBest(score_func = f_classif, k=10).fit_transform(x_test, y_test)
     '''
-    pickle_in = open('proj/Divorce pred ML Models/rfclf', 'rb')
+    pickle_in = open('proj/Divorce pred ML Models/cross_GB', 'rb')
 
     pickle_clf = pickle.load(pickle_in)
     ans=[]
