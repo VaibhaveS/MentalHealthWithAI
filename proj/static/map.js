@@ -35,29 +35,33 @@ function process(coordinates,info){
         popupAnchor: [0, -16], // point from which the popup should open relative to the iconAnchor
         className: 'marker'
     });
-    popup = `<div class="container">
-                <h4 style='display:inline'><b>${info.name}</b><h6 style='display:inline'>, ${info.formatted}</h6></h4>
-                <div>
-                <h4><img src="/static/dog.jpg" style="height:35px;display: inline"> <img src="/static/cross.png" style="height:35px;display: inline">
-                <img src="/static/wheelchair.jpg" style="height:35px;display: inline"> <img src="/static/tick.png" style="height:35px;display: inline"></h4>
-                <h4><img src="/static/free.jpg" style="height:35px;display: inline"> <img src="/static/tick.png" style="height:35px;display: inline">
-                <img src="/static/gov.jpg" style="height:35px;display: inline"> <img src="/static/tick.png" style="height:35px;"></h4>
-                <h4><img src="/static/traffic.jpg" style="height:35px;"> <img src="/static/tick.png" style="height:35px;"></h4>
-                <a href=${info.categories[0]}><em class="fab fa-linkedin"></em></a>
-                <a href=${info.distance}><em class="fab fa-github"></em></a>
-                </div>
-                </div>`;
-    marker = L.marker([coordinates[1], coordinates[0]], {icon: icon}).addTo(map);
-    marker.bindPopup(popup);
     var dict = {
         Name: info.name,
         Coordinates: coordinates,
         Categories: info.categories
     };
     dict["therapyType"]=therapy[getRandomInt(0,therapy.length-1)];
+    let optionz=[];
     for(let j in data){
+        console.log(data[j]);
         dict[j]=data[j][getRandomInt(0,data[j].length-1)];
+        optionz.push(getRandomInt(0,data[j].length-1)+parseInt(1));
     }
+    console.log(optionz);
+    popup = `<div class="container">
+                <h4 style='display:inline'><b>${info.name}</b><h6 style='display:inline'>, ${info.formatted}</h6></h4>
+                <div>
+                <h4><img src="/static/dog.jpg" style="height:35px;display: inline"> <img src="/static/cross${optionz[2]}.png" style="height:35px;display: inline">
+                <img src="/static/wheelchair.jpg" style="height:35px;display: inline"> <img src="/static/cross${optionz[1]}.png" style="height:35px;display: inline"></h4>
+                <h4><img src="/static/free.jpg" style="height:35px;display: inline"> <img src="/static/cross${optionz[0]}.png" style="height:35px;display: inline">
+                <img src="/static/gov.jpg" style="height:35px;display: inline"> <img src="/static/cross${optionz[3]}.png" style="height:35px;"></h4>
+                <h4><img src="/static/traffic.jpg" style="height:35px;"> <img src="/static/cross${optionz[4]}.png" style="height:35px;"></h4>
+                <a href=${info.categories[0]}><em class="fab fa-linkedin"></em></a>
+                <a href=${info.distance}><em class="fab fa-github"></em></a>
+                </div>
+                </div>`;
+    marker = L.marker([coordinates[1], coordinates[0]], {icon: icon}).addTo(map);
+    marker.bindPopup(popup);
     nodes.push(dict);
 }
 
@@ -102,13 +106,13 @@ var nodez;
 var radius1=200;
 function animate2(nodes,good_nodes){
     console.log("good nodes",good_nodes,nodes)
-    let circle = L.circle([nodes[nodes.length-1].Coordinates[1],nodes[nodes.length-1].Coordinates[0]], {
-        color: 'black',
-        fillColor: '#f03',
-        fillOpacity: 0.5,
-        radius: radius1
-    }).addTo(map);
-    radius1+=2000;
+    // let circle = L.circle([nodes[nodes.length-1].Coordinates[1],nodes[nodes.length-1].Coordinates[0]], {
+    //     color: 'black',
+    //     fillColor: '#f03',
+    //     fillOpacity: 0.5,
+    //     radius: radius1
+    // }).addTo(map);
+    // radius1+=2000;
     for(let nodeIndex=+0;nodeIndex<good_nodes.length;nodeIndex+=1){
         console.log("heey",nodeIndex);
         icon = L.icon({
@@ -139,18 +143,14 @@ async function BFS(nodes){
     for(let node in nodes){
         for(let node2 in nodes){
             let inserted=0;
-            for(let km=1;km<20;km+=1){
-                if(distance(nodes[node],nodes[node2])<=km && distance(nodes[node],nodes[node2])>km-1){
+            for(let km=1;km<2;km+=1){
+                if(distance(nodes[node],nodes[node2])<=km && distance(nodes[node],nodes[node2])>0){
                     inserted+=1;
                     adj[+node].push(+node2);
-                }
-                if(inserted>0) {
-                    break;
                 }
             }
         }
     }
-    console.log("adj list",adj);
     var visited=[];
     let queue=[];
     queue.push(n-1);
@@ -165,7 +165,6 @@ async function BFS(nodes){
         let maxScore=0;
         for(let zz=0;zz<nn;zz+=1){
             let node = queue.shift();
-            console.log("exploring",node);
             let score=0;
             //calculate score of this node
             for(let i in data){
@@ -181,7 +180,6 @@ async function BFS(nodes){
                 good_nodes.push(+node);
             }
             for(let j in adj[node]){
-                console.log("j= ",adj[node][j],visited,visited.includes(+adj[node][j]));
                 if(visited.includes(+adj[node][j])==false){
                     console.log("visiting",adj[node][j],"from ",node);
                     visited.push(+adj[node][j]);
@@ -189,10 +187,9 @@ async function BFS(nodes){
                 }
             }
         }
-        console.log("max possible score in this layer is ",maxScore);
+        console.log("max possible score in this layer is ",maxScore,"OF NODE",nodes[good_nodes[good_nodes.length-1]]);
         animate2(nodes,good_nodes);
     }
-    console.log("adj",adj);
 }
 
 function TSP_SUBSET(nodes,path){
@@ -222,10 +219,12 @@ function TSP_SUBSET(nodes,path){
                 let new_mask=value[2]|(1<<dict[nodes[neighbours].therapyType]);
                 //if not visited nodes.name, new_mask
                 if(nodes[neighbours].Name=="Source" && new_mask==target){
-                    console.log("Shortest path",value[0]+distance(value[1],nodes[neighbours]));
-                    document.getElementById('content1').innerHTML="The shortest path for your round trip is "+(+value[0]+distance(value[1],nodes[neighbours]));
+                    console.log("Shortest path",parseFloat(value[0])+distance(value[1],nodes[neighbours]));
+                    document.getElementById('content1').innerHTML="The shortest path for your round trip is "+(parseFloat(value[0])+parseFloat(distance(value[1],nodes[neighbours])))+" Km";
                     document.getElementById('content2').innerHTML="Click start trip! and follow the path of the car, for the shortest route";
-                    document.getElementById('yes1').click();
+                    if(parseFloat(value[0])+parseFloat(distance(value[1],nodes[neighbours]))>0){
+                        document.getElementById('yes1').click();
+                    }
                     console.log(value[3]);
                     pathz=JSON.parse(value[3]);
                     nodez=nodes;
@@ -237,7 +236,7 @@ function TSP_SUBSET(nodes,path){
                 }
                 let new_path=JSON.parse(value[3]);
                 new_path.push(+neighbours);
-                queue.push([value[0]+distance(value[1],nodes[neighbours]),nodes[neighbours],new_mask,JSON.stringify(new_path)]);
+                queue.push([parseFloat(value[0])+parseFloat(distance(value[1],nodes[neighbours])),nodes[neighbours],new_mask,JSON.stringify(new_path)]);
                 visited.push(JSON.stringify([nodes[neighbours].Name,new_mask]));
             }
         }
@@ -257,7 +256,7 @@ var data={
     "Wheelchair": ["No","Yes","Limited"],
     "Pets": ["No","Yes","Leashed"],
     "Entity": ["Government","Private"],
-    "Location": ["Easy to access","Difficult to access","N/A"]
+    "Location": ["Easy to access","Difficult to access"]
 };
 
 var userData={};
@@ -286,7 +285,7 @@ const setVisitorPin = () => {
                 };
                 var cooords=[];
                 var type=[];
-                httpRequest="https://api.geoapify.com/v2/places?categories=healthcare&filter=circle:"+position.coords.longitude+","+position.coords.latitude+",5000&bias=proximity:"+position.coords.longitude+","+position.coords.latitude+"&limit=20&apiKey=removed"
+                httpRequest="https://api.geoapify.com/v2/places?categories=healthcare&filter=circle:"+position.coords.longitude+","+position.coords.latitude+",5000&bias=proximity:"+position.coords.longitude+","+position.coords.latitude+"&limit=20&apiKey=d0cb9c1f0e4a4def9cb160e707238b15"
                 console.log("one ",httpRequest);
                 console.log("two ",httpRequest);
                 fetch(httpRequest, requestOptions)
@@ -491,3 +490,6 @@ document.getElementById("truck-button").onclick = function() {animate(pathz,node
 window.onload = function() {
   document.getElementById("yes1").click();
 };
+
+
+document.getElementById("truck-button1").onclick = function() {BFS(nodes)};
