@@ -192,12 +192,10 @@ function myCallBack(xhr){
         ele2.innerHTML=word.slice(1,word.length-2);
         let br1 = document.createElement("br");
         ele2.appendChild(br1)
-        ele2.appendChild(document.createElement("br"))
-        ele2.appendChild(document.createElement("br"))
         let btn = document.createElement("a");
         var spa = document.createElement('span');
         btn.appendChild(spa);
-        spa.innerHTML = "VIEW";
+        spa.innerHTML = "Results";
         btn.type = "submit";
         btn.name = "formBtn";
         btn.href="http://127.0.0.1:5000/analysis"
