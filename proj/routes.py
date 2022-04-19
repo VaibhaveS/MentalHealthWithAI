@@ -56,8 +56,8 @@ def tt():
          f = request.files['audio_data']
          ans=func(f)
          print(ans)
-         text="i am very angry but i am happy some time angry sad and i feel like dying"
-         txl = text.lower()
+         #text="i am very angry but i am happy some time angry sad and i feel like dying"
+         txl = ans.lower()
          txpunc = txl.translate(str.maketrans('', '', string.punctuation))
          tokens = word_tokenize(txpunc, "english")
          wordlist = []
@@ -102,8 +102,6 @@ def tt():
          print(emotion_dict)
          bad=['cheated','singled out','sad','fearful','angry','bored','embarrassed','powerless','hated','apathetic','alone','demoralized','anxious']
          good=['love','attracted','happy','safe','obsessed']
-         print(emotion_dict) 
-       
          for i,x in emotion_dict.items():
              emotion_dict[i]=x/total
          for i,x in emotion_dict.items():
@@ -118,20 +116,19 @@ def tt():
          t=""
          if(neg>=pos):
              t="Your relationship is not healthy and you need immediate care"
-             print("Your relationship is not healthy and you need immediate care")
          else:
              t="you are getting well!"
          win = Tk()
-         win.geometry("750x270")
-         def open_popup():
-             top= Toplevel(win)
-             top.geometry("750x250")
-             top.title("Confidence display")
-             Label(top, text="confidence level: "+str(round(confidence,2))+"\n\n"+t, font=('Helvetica 14 bold')).place(x=150,y=80)
-         text="confidence level: "+str(round(confidence,2))
-         Label(win,text="Your description: \n"+ ans,font=('Helvetica 14 bold')).pack(pady=20)
-         ttk.Button(win, text= "Open", command= open_popup).pack()
-         win.mainloop()
+         #win.geometry("750x270")
+        # def open_popup():
+         #    top= Toplevel(win)
+          #   top.geometry("750x250")
+         #    top.title("Confidence display")
+          #   Label(top, text="confidence level: "+str(round(confidence,2))+"\n\n"+t, font=('Helvetica 14 bold')).place(x=150,y=80)
+         #text="confidence level: "+str(round(confidence,2))
+        # Label(win,text="Your description: \n"+ ans,font=('Helvetica 14 bold')).pack(pady=20)
+        # ttk.Button(win, text= "Open", command= open_popup).pack()
+        # win.mainloop()
          ans=ans+"<br><br>"+t
          return jsonify(ans)
 
@@ -160,6 +157,11 @@ def div_pred():
 @app.route('/emotion')
 def emotion():
     return render_template('emotion.html',title='emotion')
+
+@app.route('/analysis')
+def analysis():
+    return render_template('analysis.html',title='analysis')
+
 @app.route('/map')
 def map():
     return render_template('map.html',title='map')
