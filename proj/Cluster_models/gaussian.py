@@ -9,7 +9,7 @@ df = pd.read_excel('proj\Cluster_models\divorce.xlsx')
 
 df = df[['Atr9','Atr11','Atr15','Atr17','Atr18','Atr19','Atr20','Atr36','Atr38','Atr40']]
 
-n = 4
+n = 3
 gmm = GaussianMixture(n_components=n)
 gmm.fit(df)
 
