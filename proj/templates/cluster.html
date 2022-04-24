@@ -19,7 +19,7 @@
 
     <button title="Change_group" class="button button1" onclick="choosecluster()">Change Therapy Group</button>
     <br><br>
-    <p>{{grp1[2]}} {{grp2[2]}} {{grp3[2]}}</p>
+    <p>{{grp1[2]}} {{grp2[2]}} {{grp3[2]}} {{grp4[2]}}</p>
     <div id="clus0" style="display: none;">
         <p>Kmeans</p>
         {% for i in range(0,grp1[2]) %}
@@ -88,6 +88,29 @@
         <br><br><br>
         {% endfor %}
     </div>
+
+    <div id="clus3" style="display: none;">
+        <p>DBSCAN</p>
+        {% for i in grp4[2] %}
+        <div class="quote-wrapper animate fadeInRight">
+            <h2>Group{{i}}</h2>
+            <blockquote class="text">
+                <p>
+                    {% for key2, value2 in grp4[1]['Cluster'].items() %}
+                        {% if(i==value2)%}
+                            {% if key2==170  %}
+                                <img src="/static/man(1).png" alt="hey" height="12" width="12">
+                            {% else %}
+                                <img src="/static/men.png" alt="hey" height="12" width="12">
+                            {% endif %}
+                        {% endif %}
+                    {% endfor %}
+                </p>
+            </blockquote>
+        </div>
+        <br><br><br>
+        {% endfor %}
+    </div>
 </div>
 
 
@@ -97,7 +120,7 @@
     var myVar;
     var ct = 0;
     var df;
-    const algogrps = [{{grp1[0]}}, {{grp2[0]}}, {{grp3[0]}}];
+    const algogrps = [{{grp1[0]}}, {{grp2[0]}}, {{grp3[0]}}, {{grp4[0]}}];
     
     function myFunction() {
         myVar = setTimeout(showPage, 3000);
@@ -115,20 +138,29 @@
             document.getElementById("clus0").style.display = "block";
             document.getElementById("clus1").style.display = "none";
             document.getElementById("clus2").style.display = "none";
+            document.getElementById("clus3").style.display = "none";
         }
         else if(ct==1){
             document.getElementById("clus0").style.display = "none";
             document.getElementById("clus1").style.display = "block";
             document.getElementById("clus2").style.display = "none";
+            document.getElementById("clus3").style.display = "none";
         }
         else if(ct==2){
             document.getElementById("clus0").style.display = "none";
             document.getElementById("clus1").style.display = "none";
             document.getElementById("clus2").style.display = "block";
+            document.getElementById("clus3").style.display = "none";
+        }
+        else if(ct==3){
+            document.getElementById("clus0").style.display = "none";
+            document.getElementById("clus1").style.display = "none";
+            document.getElementById("clus2").style.display = "none";
+            document.getElementById("clus3").style.display = "block";
         }
         
         ct++;
-        if(ct==3)ct=0;
+        if(ct==4)ct=0;
     }
 
 </script>

@@ -6,6 +6,7 @@ from flask import jsonify
 from flask import json
 import pickle
 import nltk
+from sklearn.cluster import KMeans, MeanShift, DBSCAN
 #nltk.download('omw-1.4')
 import numpy as np
 import pandas as pd
@@ -209,5 +210,15 @@ def cluster():
         pts['Cluster'] = list(hc[0].labels_)
         #print(grp3)
         print(pts)
-        return render_template('cluster.html',title='cluster',grp1 = [grp1,km[1].to_dict(),km[2]], grp2 = [grp2,gmm[1].to_dict(),gmm[2]], grp3 = [grp3,pts.to_dict(),hc[1]])
+
+        
+        df = pd.read_excel('proj\Cluster_models\divorce.xlsx')
+        df = df[['Atr9','Atr11','Atr15','Atr17','Atr18','Atr19','Atr20','Atr36','Atr38','Atr40']]
+        df.loc[len(df.index)] = [int(i) for i in list(form_response.values())]
+        clusters2 = DBSCAN(min_samples=10).fit_predict(df)
+        grp4 = clusters2[-1]
+        df['Cluster'] = clusters2
+        cl = df.Cluster.unique()
+        print(df)
+        return render_template('cluster.html',title='cluster',grp1 = [grp1,km[1].to_dict(),km[2]], grp2 = [grp2,gmm[1].to_dict(),gmm[2]], grp3 = [grp3,pts.to_dict(),hc[1]], grp4 = [grp4,df.to_dict(),cl])
 
