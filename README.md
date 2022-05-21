@@ -23,7 +23,7 @@ $ Install flask using pip with command "pip install flask flask-sqlalchemy"
 $ Run using "python run.py"
 ```
 
-#### Alternative
+<!-- #### Alternative
 
 
 
@@ -45,7 +45,7 @@ $ C:\Users\HP\Desktop\AI_project\venv\Scripts\activate.bat</li>
 ```
 ```sh 
 $ Run using "run.py" </li> 
-```
+``` -->
 
 #### Features
 
